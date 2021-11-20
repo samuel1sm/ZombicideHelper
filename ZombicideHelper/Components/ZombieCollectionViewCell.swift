@@ -22,7 +22,10 @@ class ZombieCollectionViewCell: UICollectionViewCell {
     private let nameLabel : UILabel = {
         let nameLabel = UILabel()
         nameLabel.textAlignment = .center
-//        nameLabel.backgroundColor = .green
+        nameLabel.backgroundColor = .green
+        nameLabel.font = UIFont.boldSystemFont(ofSize: 40)
+        nameLabel.adjustsFontSizeToFitWidth = true
+
         return nameLabel
     }()
     
@@ -37,7 +40,9 @@ class ZombieCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         nameLabel.frame = CGRect(x: 5, y: contentView.frame.size.height-50, width: contentView.frame.size.width-10, height: 50)
-        zombieImageView.frame = CGRect(x: 5, y: 0, width: contentView.frame.size.width-10, height: contentView.frame.size.height-50)
+//        zombieImageView.frame = CGRect(x: 5, y: 0, width: contentView.frame.size.width-10, height: contentView.frame.size.height-50)
+        
+        zombieImageView.frame = CGRect(x: 5, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height)
         
     }
     public func configure(label: String, image : UIImage) {

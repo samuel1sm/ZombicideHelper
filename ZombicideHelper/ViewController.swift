@@ -10,14 +10,20 @@ import UIKit
 class ViewController: UIViewController  {
     
     private var myCollectionView: UICollectionView?
-
+    private let cellPerRoll : CGFloat = 2
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Zombies"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 1
+        layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 1
-        layout.itemSize = CGSize(width: (view.frame.size.width/3) - 4, height: (view.frame.size.width/3)-4)
+        print(view.frame.size.width/cellPerRoll)
+        layout.itemSize = CGSize(width: (view.frame.size.width/cellPerRoll) - 4, height: (view.frame.size.width/cellPerRoll)-4)
         myCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         guard let myCollectionView = myCollectionView else {return}
