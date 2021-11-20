@@ -13,36 +13,33 @@ class ViewController: UIViewController  {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 1
+        layout.minimumInteritemSpacing = 1
+        layout.itemSize = CGSize(width: (view.frame.size.width/3) - 4, height: (view.frame.size.width/3)-4)
+        myCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
-        let view = UIView()
-        view.backgroundColor = .white
-        
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: 80, height: 100)
-        
-        myCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        myCollectionView?.dataSource = self
-        myCollectionView?.delegate = self
-        myCollectionView?.register(ZombiCollectionViewCell.self, forCellWithReuseIdentifier: ZombiCollectionViewCell.indentifier)
-        myCollectionView?.backgroundColor = UIColor.white
-       
-        
-        view.addSubview(myCollectionView ?? UICollectionView())
-        self.view = view
+        guard let myCollectionView = myCollectionView else {return}
+        myCollectionView.register(ZombieCollectionViewCell.self, forCellWithReuseIdentifier: ZombieCollectionViewCell.indentifier)
+        myCollectionView.dataSource = self
+        myCollectionView.delegate = self
+        view.addSubview(myCollectionView)
+        myCollectionView.frame = view.bounds
     }
+    
 
 }
 
 extension ViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        9
+        30
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ZombiCollectionViewCell.indentifier, for: indexPath) as? ZombiCollectionViewCell else { fatalError("Cell doenst exists") }
-        
-        cell.zombiName = "teste"
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ZombieCollectionViewCell.indentifier, for: indexPath) as? ZombieCollectionViewCell else { fatalError("Cell doenst exists") }
+
+        cell.configure(label: "teste", image: UIImage(systemName: "house")!)
         return cell
     }
 }
