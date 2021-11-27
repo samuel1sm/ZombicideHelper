@@ -9,8 +9,8 @@ import UIKit
 
 class ViewController: UIViewController  {
     
-    private var myCollectionView: UICollectionView?
-    private let cellPerRoll : CGFloat = 2
+    var myCollectionView: UICollectionView?
+    let cellPerRoll : CGFloat = 2
     let zombiesBrain = ZombiesBrain()
     
     override func viewDidLoad() {
@@ -18,27 +18,7 @@ class ViewController: UIViewController  {
         title = "Zombies"
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 5
-        layout.minimumInteritemSpacing = 1
-        print(view.frame.size.width/cellPerRoll)
-        layout.itemSize = CGSize(width: (view.frame.size.width/cellPerRoll) - 4, height: (view.frame.size.width/cellPerRoll)-4)
-        myCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
-        guard let myCollectionView = myCollectionView else {return}
-        myCollectionView.register(ZombieCollectionViewCell.self, forCellWithReuseIdentifier: ZombieCollectionViewCell.indentifier)
-        myCollectionView.dataSource = self
-        myCollectionView.delegate = self
-        view.addSubview(myCollectionView)
-        myCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            myCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            myCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            myCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 2),
-            myCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor , constant: -2),
-            myCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
+        configureCollectionViewUI()
     }
   
     

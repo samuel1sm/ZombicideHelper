@@ -15,6 +15,7 @@
 		003B7FD9274458FE007B1F2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 003B7FD7274458FE007B1F2C /* LaunchScreen.storyboard */; };
 		005C0E422751563F008B9C92 /* ZombiesInfo.csv in Resources */ = {isa = PBXBuildFile; fileRef = 005C0E412751563F008B9C92 /* ZombiesInfo.csv */; };
 		005C0E44275156B2008B9C92 /* ZombiesBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005C0E43275156B2008B9C92 /* ZombiesBrain.swift */; };
+		005C0E462752A181008B9C92 /* ZombieCollectionViewUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005C0E452752A181008B9C92 /* ZombieCollectionViewUI.swift */; };
 		00BCA54C274473B700910909 /* ZombieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCA54B274473B700910909 /* ZombieCollectionViewCell.swift */; };
 		00BCA57427498E5000910909 /* ZombieInformations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCA57327498E5000910909 /* ZombieInformations.swift */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,7 @@
 		003B7FDA274458FE007B1F2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		005C0E412751563F008B9C92 /* ZombiesInfo.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ZombiesInfo.csv; sourceTree = "<group>"; };
 		005C0E43275156B2008B9C92 /* ZombiesBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombiesBrain.swift; sourceTree = "<group>"; };
+		005C0E452752A181008B9C92 /* ZombieCollectionViewUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombieCollectionViewUI.swift; sourceTree = "<group>"; };
 		00BCA54B274473B700910909 /* ZombieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombieCollectionViewCell.swift; sourceTree = "<group>"; };
 		00BCA57327498E5000910909 /* ZombieInformations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombieInformations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,6 +84,7 @@
 				00BCA5482744729800910909 /* Components */,
 				003B7FD7274458FE007B1F2C /* LaunchScreen.storyboard */,
 				003B7FD2274458FC007B1F2C /* Main.storyboard */,
+				005C0E452752A181008B9C92 /* ZombieCollectionViewUI.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				005C0E462752A181008B9C92 /* ZombieCollectionViewUI.swift in Sources */,
 				005C0E44275156B2008B9C92 /* ZombiesBrain.swift in Sources */,
 				00BCA54C274473B700910909 /* ZombieCollectionViewCell.swift in Sources */,
 				003B7FD1274458FB007B1F2C /* ViewController.swift in Sources */,
@@ -343,6 +347,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -371,6 +376,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
