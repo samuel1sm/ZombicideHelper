@@ -21,10 +21,14 @@ class ZombieCollectionViewCell: UICollectionViewCell {
     private let nameLabel : UILabel = {
         let nameLabel = UILabel()
         nameLabel.textAlignment = .center
-        nameLabel.backgroundColor = .systemGreen
+        nameLabel.backgroundColor = UIColor.systemGray.withAlphaComponent(0.9)
+        nameLabel.layer.borderWidth = 1
+        nameLabel.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
         nameLabel.font = UIFont.boldSystemFont(ofSize: 25)
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.layer.masksToBounds = true
+        nameLabel.layer.cornerRadius = 5
         return nameLabel
     }()
     
@@ -37,7 +41,6 @@ class ZombieCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        nameLabel.layer.cornerRadius = 10
         
         NSLayoutConstraint.activate([
             nameLabel.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -6),
@@ -46,11 +49,6 @@ class ZombieCollectionViewCell: UICollectionViewCell {
             nameLabel.topAnchor.constraint(greaterThanOrEqualTo: self.safeAreaLayoutGuide.topAnchor, constant: 0),
             nameLabel.centerXAnchor.constraint(equalTo:self.centerXAnchor , constant: 0)
         ])
-
-//        zombieImageView.frame = CGRect(x: 5, y: 0, width: contentView.frame.size.width-10, height: contentView.frame.size.height-50)
-        
-//        zombieImageView.frame = CGRect(x: 5, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height)
-        
     }
     public func configure(zombieInformation: ZombieInformations) {
         nameLabel.text = zombieInformation.name
