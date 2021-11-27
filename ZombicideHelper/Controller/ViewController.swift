@@ -11,7 +11,7 @@ class ViewController: UIViewController  {
     
     private var myCollectionView: UICollectionView?
     private let cellPerRoll : CGFloat = 2
-    
+    let zombiesBrain = ZombiesBrain()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,18 +34,21 @@ class ViewController: UIViewController  {
         myCollectionView.frame = view.bounds
     }
     
+  
+    
 
 }
 
 extension ViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        30
+        return zombiesBrain.zombiesList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ZombieCollectionViewCell.indentifier, for: indexPath) as? ZombieCollectionViewCell else { fatalError("Cell doenst exists") }
-
-        cell.configure(label: "teste", image: UIImage(systemName: "house")!)
+        
+        let information = zombiesBrain.getZombieInformation(zombie: indexPath.row)
+        cell.configure(zombieInformation: information)
         return cell
     }
 }

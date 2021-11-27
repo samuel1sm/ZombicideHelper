@@ -13,7 +13,10 @@
 		003B7FD4274458FC007B1F2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 003B7FD2274458FC007B1F2C /* Main.storyboard */; };
 		003B7FD6274458FE007B1F2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 003B7FD5274458FE007B1F2C /* Assets.xcassets */; };
 		003B7FD9274458FE007B1F2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 003B7FD7274458FE007B1F2C /* LaunchScreen.storyboard */; };
+		005C0E422751563F008B9C92 /* ZombiesInfo.csv in Resources */ = {isa = PBXBuildFile; fileRef = 005C0E412751563F008B9C92 /* ZombiesInfo.csv */; };
+		005C0E44275156B2008B9C92 /* ZombiesBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005C0E43275156B2008B9C92 /* ZombiesBrain.swift */; };
 		00BCA54C274473B700910909 /* ZombieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCA54B274473B700910909 /* ZombieCollectionViewCell.swift */; };
+		00BCA57427498E5000910909 /* ZombieInformations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCA57327498E5000910909 /* ZombieInformations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +28,10 @@
 		003B7FD5274458FE007B1F2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		003B7FD8274458FE007B1F2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		003B7FDA274458FE007B1F2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		005C0E412751563F008B9C92 /* ZombiesInfo.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ZombiesInfo.csv; sourceTree = "<group>"; };
+		005C0E43275156B2008B9C92 /* ZombiesBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombiesBrain.swift; sourceTree = "<group>"; };
 		00BCA54B274473B700910909 /* ZombieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombieCollectionViewCell.swift; sourceTree = "<group>"; };
+		00BCA57327498E5000910909 /* ZombieInformations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombieInformations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +64,34 @@
 		003B7FCB274458FB007B1F2C /* ZombicideHelper */ = {
 			isa = PBXGroup;
 			children = (
-				00BCA5482744729800910909 /* Components */,
 				003B7FCC274458FB007B1F2C /* AppDelegate.swift */,
 				003B7FCE274458FB007B1F2C /* SceneDelegate.swift */,
-				003B7FD0274458FB007B1F2C /* ViewController.swift */,
-				003B7FD2274458FC007B1F2C /* Main.storyboard */,
+				00BCA57227498E2A00910909 /* Model */,
+				005C0DFB274D8B56008B9C92 /* Controller */,
+				005C0DFA274D8B36008B9C92 /* View */,
 				003B7FD5274458FE007B1F2C /* Assets.xcassets */,
-				003B7FD7274458FE007B1F2C /* LaunchScreen.storyboard */,
 				003B7FDA274458FE007B1F2C /* Info.plist */,
+				005C0E412751563F008B9C92 /* ZombiesInfo.csv */,
 			);
 			path = ZombicideHelper;
+			sourceTree = "<group>";
+		};
+		005C0DFA274D8B36008B9C92 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				00BCA5482744729800910909 /* Components */,
+				003B7FD7274458FE007B1F2C /* LaunchScreen.storyboard */,
+				003B7FD2274458FC007B1F2C /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		005C0DFB274D8B56008B9C92 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				003B7FD0274458FB007B1F2C /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		00BCA5482744729800910909 /* Components */ = {
@@ -76,6 +100,15 @@
 				00BCA54B274473B700910909 /* ZombieCollectionViewCell.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		00BCA57227498E2A00910909 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				00BCA57327498E5000910909 /* ZombieInformations.swift */,
+				005C0E43275156B2008B9C92 /* ZombiesBrain.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +171,7 @@
 			files = (
 				003B7FD9274458FE007B1F2C /* LaunchScreen.storyboard in Resources */,
 				003B7FD6274458FE007B1F2C /* Assets.xcassets in Resources */,
+				005C0E422751563F008B9C92 /* ZombiesInfo.csv in Resources */,
 				003B7FD4274458FC007B1F2C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,10 +183,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				005C0E44275156B2008B9C92 /* ZombiesBrain.swift in Sources */,
 				00BCA54C274473B700910909 /* ZombieCollectionViewCell.swift in Sources */,
 				003B7FD1274458FB007B1F2C /* ViewController.swift in Sources */,
 				003B7FCD274458FB007B1F2C /* AppDelegate.swift in Sources */,
 				003B7FCF274458FB007B1F2C /* SceneDelegate.swift in Sources */,
+				00BCA57427498E5000910909 /* ZombieInformations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
