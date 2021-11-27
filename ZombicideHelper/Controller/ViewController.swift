@@ -31,9 +31,15 @@ class ViewController: UIViewController  {
         myCollectionView.dataSource = self
         myCollectionView.delegate = self
         view.addSubview(myCollectionView)
-        myCollectionView.frame = view.bounds
+        myCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            myCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            myCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            myCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 2),
+            myCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor , constant: -2),
+            myCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
-    
   
     
 
