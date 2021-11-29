@@ -24,9 +24,9 @@ class ZombieCollectionViewCell: UICollectionViewCell {
         nameLabel.backgroundColor = UIColor.systemGray.withAlphaComponent(0.9)
         nameLabel.layer.borderWidth = 1
         nameLabel.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 25)
-        nameLabel.adjustsFontSizeToFitWidth = true
+        nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.numberOfLines = 0
         nameLabel.layer.masksToBounds = true
         nameLabel.layer.cornerRadius = 5
         return nameLabel
