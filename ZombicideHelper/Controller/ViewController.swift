@@ -42,7 +42,9 @@ extension ViewController:UICollectionViewDataSource{
 extension ViewController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailView = ZombieDetailsViewController()
+        detailView.modalPresentationStyle = .fullScreen
         detailView.zombieInformation = zombiesBrain.getZombieInformation(zombie: indexPath.row)
+//        navigationController?.pushViewController(detailView, animated: true)
         present(detailView, animated: true, completion: nil)
     }
 }

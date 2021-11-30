@@ -9,6 +9,7 @@ import UIKit
 
 class ZombieDetailsViewController: UIViewController {
     var zombieInformation : ZombieInformations!
+    let scrollView : UIScrollView = UIScrollView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
