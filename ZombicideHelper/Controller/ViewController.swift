@@ -41,6 +41,8 @@ extension ViewController:UICollectionViewDataSource{
 
 extension ViewController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("tapped \(indexPath.row)")
+        let detailView = ZombieDetailsViewController()
+        detailView.zombieInformation = zombiesBrain.getZombieInformation(zombie: indexPath.row)
+        present(detailView, animated: true, completion: nil)
     }
 }
