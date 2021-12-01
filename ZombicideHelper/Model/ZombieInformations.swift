@@ -8,20 +8,20 @@
 import Foundation
 
 struct ZombieInformations {
-    let name : String
-    let zombieArtUrl : String
-    let zombieModelUrl : String
+    let name: String
+    let zombieArtUrl: String
+    let zombieModelUrl: String
     let zombieText: String
     let game: String
     let zombieType: String
-    let Description : String
-    let status : ZombieStatus
+    let description: String
+    let status: ZombieStatus
 }
 
 struct ZombieStatus {
-    let targetPriority : Int
-    let actions : String
-    let minDamageDestroy : Int
-    let experienceProvided : Int
-    let damageInflicted : String
+    let targetPriority: Int
+    let actions: String
+    let minDamageDestroy: Int
+    let experienceProvided: Int
+    let damageInflicted: String
 }

@@ -128,6 +128,7 @@
 			buildConfigurationList = 003B7FDD274458FE007B1F2C /* Build configuration list for PBXNativeTarget "ZombicideHelper" */;
 			buildPhases = (
 				003B7FC5274458FB007B1F2C /* Sources */,
+				00B877922758137800F91872 /* Run Swift Lint */,
 				003B7FC6274458FB007B1F2C /* Frameworks */,
 				003B7FC7274458FB007B1F2C /* Resources */,
 			);
@@ -186,6 +187,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00B877922758137800F91872 /* Run Swift Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Swift Lint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint autocorrect && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		003B7FC5274458FB007B1F2C /* Sources */ = {
