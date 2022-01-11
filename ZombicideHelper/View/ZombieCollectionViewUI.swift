@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension ViewController {
+extension ZombiesViewController {
     func configureCollectionViewUI() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical

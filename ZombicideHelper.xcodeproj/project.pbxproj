@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		003B7FCD274458FB007B1F2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003B7FCC274458FB007B1F2C /* AppDelegate.swift */; };
 		003B7FCF274458FB007B1F2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003B7FCE274458FB007B1F2C /* SceneDelegate.swift */; };
-		003B7FD1274458FB007B1F2C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003B7FD0274458FB007B1F2C /* ViewController.swift */; };
-		003B7FD4274458FC007B1F2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 003B7FD2274458FC007B1F2C /* Main.storyboard */; };
+		003B7FD1274458FB007B1F2C /* ZombiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003B7FD0274458FB007B1F2C /* ZombiesViewController.swift */; };
 		003B7FD6274458FE007B1F2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 003B7FD5274458FE007B1F2C /* Assets.xcassets */; };
 		003B7FD9274458FE007B1F2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 003B7FD7274458FE007B1F2C /* LaunchScreen.storyboard */; };
 		005C0E422751563F008B9C92 /* ZombiesInfo.csv in Resources */ = {isa = PBXBuildFile; fileRef = 005C0E412751563F008B9C92 /* ZombiesInfo.csv */; };
@@ -26,8 +25,7 @@
 		003B7FC9274458FB007B1F2C /* ZombicideHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZombicideHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		003B7FCC274458FB007B1F2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		003B7FCE274458FB007B1F2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		003B7FD0274458FB007B1F2C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		003B7FD3274458FC007B1F2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		003B7FD0274458FB007B1F2C /* ZombiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombiesViewController.swift; sourceTree = "<group>"; };
 		003B7FD5274458FE007B1F2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		003B7FD8274458FE007B1F2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		003B7FDA274458FE007B1F2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,7 +85,6 @@
 			children = (
 				00BCA5482744729800910909 /* Components */,
 				003B7FD7274458FE007B1F2C /* LaunchScreen.storyboard */,
-				003B7FD2274458FC007B1F2C /* Main.storyboard */,
 				005C0E452752A181008B9C92 /* ZombieCollectionViewUI.swift */,
 				00AD4DC42752EF2100F67123 /* ZombieDetailsUI.swift */,
 			);
@@ -97,7 +94,7 @@
 		005C0DFB274D8B56008B9C92 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				003B7FD0274458FB007B1F2C /* ViewController.swift */,
+				003B7FD0274458FB007B1F2C /* ZombiesViewController.swift */,
 				00AD4DC22752ED9800F67123 /* ZombieDetailsViewController.swift */,
 			);
 			path = Controller;
@@ -182,7 +179,6 @@
 				003B7FD9274458FE007B1F2C /* LaunchScreen.storyboard in Resources */,
 				003B7FD6274458FE007B1F2C /* Assets.xcassets in Resources */,
 				005C0E422751563F008B9C92 /* ZombiesInfo.csv in Resources */,
-				003B7FD4274458FC007B1F2C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,7 +214,7 @@
 				005C0E44275156B2008B9C92 /* ZombiesBrain.swift in Sources */,
 				00BCA54C274473B700910909 /* ZombieCollectionViewCell.swift in Sources */,
 				00AD4DC52752EF2100F67123 /* ZombieDetailsUI.swift in Sources */,
-				003B7FD1274458FB007B1F2C /* ViewController.swift in Sources */,
+				003B7FD1274458FB007B1F2C /* ZombiesViewController.swift in Sources */,
 				003B7FCD274458FB007B1F2C /* AppDelegate.swift in Sources */,
 				00AD4DC32752ED9800F67123 /* ZombieDetailsViewController.swift in Sources */,
 				003B7FCF274458FB007B1F2C /* SceneDelegate.swift in Sources */,
@@ -229,14 +225,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		003B7FD2274458FC007B1F2C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				003B7FD3274458FC007B1F2C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		003B7FD7274458FE007B1F2C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -376,7 +364,6 @@
 				INFOPLIST_FILE = ZombicideHelper/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -405,7 +392,6 @@
 				INFOPLIST_FILE = ZombicideHelper/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

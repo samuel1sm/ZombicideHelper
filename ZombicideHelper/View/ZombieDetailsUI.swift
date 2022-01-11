@@ -89,8 +89,8 @@ extension ZombieDetailsViewController {
             scrollView.topAnchor.constraint(equalTo: firstStack.bottomAnchor, constant: 5),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+//            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
 
         NSLayoutConstraint.activate([

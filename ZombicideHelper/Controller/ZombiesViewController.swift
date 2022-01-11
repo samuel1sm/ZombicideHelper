@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ZombiesViewController: UIViewController {
 
     var myCollectionView: UICollectionView?
     let cellPerRoll: CGFloat = 2
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: UICollectionViewDataSource {
+extension ZombiesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return zombiesBrain.zombiesList.count
     }
@@ -40,10 +40,10 @@ extension ViewController: UICollectionViewDataSource {
     }
 }
 
-extension ViewController: UICollectionViewDelegate {
+extension ZombiesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailView = ZombieDetailsViewController()
-        detailView.modalPresentationStyle = .fullScreen
+//        detailView.modalPresentationStyle = .fullScreen
         detailView.zombieInformation = zombiesBrain.getZombieInformation(zombie: indexPath.row)
 //        navigationController?.pushViewController(detailView, animated: true)
         present(detailView, animated: true, completion: nil)
