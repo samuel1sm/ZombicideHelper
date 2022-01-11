@@ -58,9 +58,10 @@ extension ZombiesViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ZombieCollectionViewCell.indentifier,
-                                                            for: indexPath) as? ZombieCollectionViewCell
-                                                            else { fatalError("Cell doenst exists") }
+        guard let cell = collectionView
+                .dequeueReusableCell(withReuseIdentifier: ZombieCollectionViewCell.indentifier, for: indexPath)
+                as? ZombieCollectionViewCell
+        else { fatalError("Cell doenst exists") }
 
         let information = zombiesBrain.getZombieInformation(zombie: indexPath.row)
         cell.configure(zombieInformation: information)
@@ -71,9 +72,9 @@ extension ZombiesViewController: UICollectionViewDataSource {
 extension ZombiesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailView = ZombieDetailsViewController()
-//        detailView.modalPresentationStyle = .fullScreen
+        //        detailView.modalPresentationStyle = .fullScreen
         detailView.zombieInformation = zombiesBrain.getZombieInformation(zombie: indexPath.row)
-//        navigationController?.pushViewController(detailView, animated: true)
+        //        navigationController?.pushViewController(detailView, animated: true)
         present(detailView, animated: true, completion: nil)
     }
 }
