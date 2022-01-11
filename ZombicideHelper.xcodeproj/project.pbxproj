@@ -14,7 +14,6 @@
 		003B7FD9274458FE007B1F2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 003B7FD7274458FE007B1F2C /* LaunchScreen.storyboard */; };
 		005C0E422751563F008B9C92 /* ZombiesInfo.csv in Resources */ = {isa = PBXBuildFile; fileRef = 005C0E412751563F008B9C92 /* ZombiesInfo.csv */; };
 		005C0E44275156B2008B9C92 /* ZombiesBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005C0E43275156B2008B9C92 /* ZombiesBrain.swift */; };
-		005C0E462752A181008B9C92 /* ZombieCollectionViewUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005C0E452752A181008B9C92 /* ZombieCollectionViewUI.swift */; };
 		00AD4DC32752ED9800F67123 /* ZombieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD4DC22752ED9800F67123 /* ZombieDetailsViewController.swift */; };
 		00AD4DC52752EF2100F67123 /* ZombieDetailsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD4DC42752EF2100F67123 /* ZombieDetailsUI.swift */; };
 		00BCA54C274473B700910909 /* ZombieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCA54B274473B700910909 /* ZombieCollectionViewCell.swift */; };
@@ -31,7 +30,6 @@
 		003B7FDA274458FE007B1F2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		005C0E412751563F008B9C92 /* ZombiesInfo.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ZombiesInfo.csv; sourceTree = "<group>"; };
 		005C0E43275156B2008B9C92 /* ZombiesBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombiesBrain.swift; sourceTree = "<group>"; };
-		005C0E452752A181008B9C92 /* ZombieCollectionViewUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombieCollectionViewUI.swift; sourceTree = "<group>"; };
 		00AD4DC22752ED9800F67123 /* ZombieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombieDetailsViewController.swift; sourceTree = "<group>"; };
 		00AD4DC42752EF2100F67123 /* ZombieDetailsUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombieDetailsUI.swift; sourceTree = "<group>"; };
 		00BCA54B274473B700910909 /* ZombieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombieCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -85,7 +83,6 @@
 			children = (
 				00BCA5482744729800910909 /* Components */,
 				003B7FD7274458FE007B1F2C /* LaunchScreen.storyboard */,
-				005C0E452752A181008B9C92 /* ZombieCollectionViewUI.swift */,
 				00AD4DC42752EF2100F67123 /* ZombieDetailsUI.swift */,
 			);
 			path = View;
@@ -210,7 +207,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				005C0E462752A181008B9C92 /* ZombieCollectionViewUI.swift in Sources */,
 				005C0E44275156B2008B9C92 /* ZombiesBrain.swift in Sources */,
 				00BCA54C274473B700910909 /* ZombieCollectionViewCell.swift in Sources */,
 				00AD4DC52752EF2100F67123 /* ZombieDetailsUI.swift in Sources */,
