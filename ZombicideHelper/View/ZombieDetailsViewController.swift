@@ -1,14 +1,22 @@
 //
-//  ZombieDetailsUI.swift
+//  ZombieDetailsViewController.swift
 //  ZombicideHelper
 //
 //  Created by FRANCISCO SAMUEL DA SILVA MARTINS on 27/11/21.
 //
 
-import Foundation
 import UIKit
 
-extension ZombieDetailsViewController {
+class ZombieDetailsViewController: UIViewController {
+    var zombieInformation: ZombieInformations!
+    let scrollView: UIScrollView = UIScrollView()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = zombieInformation.name
+
+        buildScreen()
+    }
 
     func buildScreen() {
         guard let backgroundImage = UIImage(named: "backgroundImage") else {return}
@@ -25,8 +33,6 @@ extension ZombieDetailsViewController {
         zombieImage.translatesAutoresizingMaskIntoConstraints = false
         zombieImage.contentMode = .scaleAspectFill
         zombieImage.clipsToBounds = true
-
-        title = zombieInformation.name
 
         let status = zombieInformation.status
         let zombieStatus = UILabel()
@@ -108,4 +114,5 @@ extension ZombieDetailsViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("dasdasdasd")
     }
+
 }

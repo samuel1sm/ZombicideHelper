@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ZombiesBrain {
+struct ZombiesInformationViewModel {
     private let zommbieFile = "ZombiesInfo"
     private let separator: String = ","
     var zombiesList: [ZombieInformations]!

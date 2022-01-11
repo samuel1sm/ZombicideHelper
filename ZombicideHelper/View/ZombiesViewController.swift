@@ -11,18 +11,18 @@ class ZombiesViewController: UIViewController {
 
     var myCollectionView: UICollectionView?
     let cellPerRoll: CGFloat = 2
-    let zombiesBrain = ZombiesBrain()
+    let zombiesBrain = ZombiesInformationViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Zombies"
         navigationController?.navigationBar.prefersLargeTitles = true
 
-        configureCollectionViewUI()
+        buildScreen()
 
     }
 
-    func configureCollectionViewUI() {
+    func buildScreen() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 3
