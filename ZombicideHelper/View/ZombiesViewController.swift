@@ -25,12 +25,10 @@ class ZombiesViewController: UIViewController {
         super.viewDidLoad()
         title = "Zombies"
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: Constants.filterIcon),
-            style: .done,
-            target: self,
-            action: #selector(openFilters)
-        )
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: Constants.filterIcon),
+                                                            style: .done, target: self, action: #selector(openFilters))
+
+        view.backgroundColor = .systemBackground
 
         tapGesture = UITapGestureRecognizer(target: self,
                          action: #selector(hideKeyboard))
@@ -46,7 +44,9 @@ class ZombiesViewController: UIViewController {
     }
 
     @objc func openFilters() {
-        print("moral de mais")
+        let filterView = FilterViewController()
+//        filterView.modalPresentationStyle = .fullScreen
+        present(filterView, animated: true, completion: nil)
     }
 
     func configureCollectionView() {
@@ -59,6 +59,7 @@ class ZombiesViewController: UIViewController {
 
         myCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         myCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        myCollectionView.backgroundColor = .clear
         myCollectionView.register(ZombieCollectionViewCell.self,
                                   forCellWithReuseIdentifier: ZombieCollectionViewCell.indentifier)
 
