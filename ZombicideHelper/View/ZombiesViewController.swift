@@ -19,11 +19,15 @@ class ZombiesViewController: UIViewController {
     }()
 
     var myCollectionView: UICollectionView!
+    var tapGesture: UITapGestureRecognizer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Zombies"
         navigationController?.navigationBar.prefersLargeTitles = true
+
+        tapGesture = UITapGestureRecognizer(target: self,
+                         action: #selector(hideKeyboard))
 
         configureCollectionView()
 
@@ -71,6 +75,10 @@ class ZombiesViewController: UIViewController {
         ])
     }
 
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
+
 }
 
 extension ZombiesViewController: UISearchBarDelegate {
@@ -79,8 +87,14 @@ extension ZombiesViewController: UISearchBarDelegate {
         myCollectionView.reloadData()
     }
 
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        print("saiu")
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        view.addGestureRecognizer(tapGesture)
+        return true
+    }
+
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        view.removeGestureRecognizer(tapGesture)
+        return true
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -88,9 +102,9 @@ extension ZombiesViewController: UISearchBarDelegate {
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("fasfas")
         view.endEditing(true)
     }
+
 }
 
 extension ZombiesViewController: UICollectionViewDataSource {
