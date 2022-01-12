@@ -18,6 +18,7 @@ class ZombieDetailsViewController: UIViewController {
     let zombieImage: UIImageView = {
         let view = UIImageView()
         view.layer.cornerRadius = 10
+        view.layer.borderWidth = 1
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
@@ -26,21 +27,17 @@ class ZombieDetailsViewController: UIViewController {
     let zombieStatusLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 20)
+        label.textAlignment = .justified
         return label
     }()
-    let zombieTextLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.backgroundColor = .black
-        return label
-    }()
-    let scrollView: UIScrollView =  {
-        let view = UIScrollView()
+    let textView: UITextView = {
+        let view = UITextView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemGreen
-        view.isUserInteractionEnabled = true
-        view.contentInsetAdjustmentBehavior = .automatic
+        view.font = UIFont.systemFont(ofSize: 20)
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 5
+        view.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.8)
         return view
     }()
 
@@ -64,14 +61,14 @@ class ZombieDetailsViewController: UIViewController {
         zombieStatusLabel.text = """
                                 Target Priority: \(status.targetPriority)
                                 Actions: \(status.actions)
-                                Damage to Destroy: \(status.minDamageDestroy)
-                                Experience Provided: \(status.experienceProvided)
-                                Damage Inflicted: \(status.damageInflicted)
+                                Life: \(status.minDamageDestroy)
+                                Experience: \(status.experienceProvided)
+                                Damage: \(status.damageInflicted)
                                 Type: \(zombieInformation.zombieType)
                                 Game: \(zombieInformation.game)
-                            """
+                                """
 
-        zombieTextLabel.text =  zombieInformation.zombieText.replacingOccurrences(of: "||", with: "\n")
+        textView.text =  zombieInformation.zombieText.replacingOccurrences(of: "||", with: "\n")
 
     }
 
@@ -84,17 +81,10 @@ class ZombieDetailsViewController: UIViewController {
         screenStack.distribution = .fillEqually
         screenStack.setCustomSpacing(10, after: zombieImage)
 
-        let testImage = UIImageView(image: UIImage(named: zombieInformation.zombieModelUrl))
-
-        let screenSize: CGRect = UIScreen.main.bounds
-        testImage.frame = CGRect(x: 0, y: 0, width: 50, height: screenSize.height)
-
-        scrollView.addSubview(testImage)
-
         screenStack.spacing = 3
         view.addSubview(screenStack)
         view.addSubview(zombieTitleLabel)
-        view.addSubview(scrollView)
+        view.addSubview(textView)
 
         NSLayoutConstraint.activate([
             zombieTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -114,27 +104,13 @@ class ZombieDetailsViewController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: screenStack.bottomAnchor, constant: 5),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+            textView.topAnchor.constraint(equalTo: screenStack.bottomAnchor, constant: 5),
+            textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            textView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            textView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
 
-//        NSLayoutConstraint.activate([
-//            zombieTextLabel.topAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.topAnchor, constant: 10),
-//            zombieTextLabel.bottomAnchor
-//                .constraint(equalTo: scrollView.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-//            zombieTextLabel.leadingAnchor
-//                .constraint(greaterThanOrEqualTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-//            zombieTextLabel.trailingAnchor
-//                .constraint(lessThanOrEqualTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-////            zombieTextLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
-//        ])
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("dasdasdasd")
     }
 
 }
