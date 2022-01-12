@@ -12,10 +12,26 @@ struct ZombiesInformationViewModel {
     private let separator: String = ","
     private var zombiesList: [ZombieInformations]!
     var filteredList: [ZombieInformations]!
+    var filterOptions: FilterOptions!
 
     init() {
         zombiesList = readCsv(inputFile: zommbieFile, separator: separator)
         filteredList = zombiesList
+
+        filterOptions = createFilterOtions()
+
+    }
+
+    private func createFilterOtions() -> FilterOptions {
+        let gamesSet = Set(zombiesList.map { $0.game })
+        let zombieTypeSet = Set(zombiesList.map { $0.zombieType })
+        let minDamageDestroySet = Set(zombiesList.map { $0.status.minDamageDestroy })
+        let damageInflictedSet = Set(zombiesList.map { $0.status.damageInflicted })
+        let actionsSet = Set(zombiesList.map { $0.status.actions })
+
+        return FilterOptions(gamesSet: gamesSet, zombieTypeSet: zombieTypeSet,
+                             minDamageDestroySet: minDamageDestroySet, damageInflictedSet: damageInflictedSet,
+                             actionsSet: actionsSet)
     }
 
     mutating func filterList (filter: String) {
@@ -58,4 +74,12 @@ struct ZombiesInformationViewModel {
 
         return result
     }
+}
+
+struct FilterOptions {
+    var gamesSet: Set<String>!
+    var zombieTypeSet: Set<String>!
+    var minDamageDestroySet: Set<String>!
+    var damageInflictedSet: Set<String>!
+    var actionsSet: Set<String>!
 }
