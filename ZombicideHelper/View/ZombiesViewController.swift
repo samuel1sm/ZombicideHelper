@@ -101,10 +101,6 @@ extension ZombiesViewController: UISearchBarDelegate {
         view.endEditing(true)
     }
 
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        view.endEditing(true)
-    }
-
 }
 
 extension ZombiesViewController: UICollectionViewDataSource {
@@ -130,7 +126,6 @@ extension ZombiesViewController: UICollectionViewDelegate {
         let detailView = ZombieDetailsViewController()
         //        detailView.modalPresentationStyle = .fullScreen
         detailView.zombieInformation = zombiesViewModel.getZombieInformation(zombie: indexPath.row)
-        //        navigationController?.pushViewController(detailView, animated: true)
         present(detailView, animated: true, completion: nil)
     }
 }
