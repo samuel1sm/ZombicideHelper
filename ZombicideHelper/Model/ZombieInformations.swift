@@ -21,7 +21,7 @@ struct ZombieInformations {
 struct ZombieStatus {
     let targetPriority: Int
     let actions: String
-    let minDamageDestroy: Int
+    let minDamageDestroy: String
     let experienceProvided: Int
     let damageInflicted: String
 }

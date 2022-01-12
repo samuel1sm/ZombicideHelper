@@ -45,7 +45,7 @@ struct ZombiesInformationViewModel {
         for info in splitedData {
             let line = info.components(separatedBy: separator)
             let zombieStatus = ZombieStatus(targetPriority: Int(line[4])!, actions: String(line[5]),
-                                            minDamageDestroy: Int(line[6])!, experienceProvided: Int(line[7])!,
+                                            minDamageDestroy: String(line[6]), experienceProvided: Int(line[7])!,
                                             damageInflicted: String(line[8]))
 
             let zombie = ZombieInformations(name: String(line[0]), zombieArtUrl: String(line[1]),
