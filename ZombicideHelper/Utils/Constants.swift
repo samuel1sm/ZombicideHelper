@@ -9,4 +9,5 @@ import Foundation
 
 struct Constants {
     static let searchIcon = "magnifyingglass"
+    static let filterIcon = "slider.horizontal.3"
 }

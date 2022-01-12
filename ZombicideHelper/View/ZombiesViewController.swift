@@ -25,6 +25,12 @@ class ZombiesViewController: UIViewController {
         super.viewDidLoad()
         title = "Zombies"
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: Constants.filterIcon),
+            style: .done,
+            target: self,
+            action: #selector(openFilters)
+        )
 
         tapGesture = UITapGestureRecognizer(target: self,
                          action: #selector(hideKeyboard))
@@ -37,6 +43,10 @@ class ZombiesViewController: UIViewController {
 
         buildScreen()
 
+    }
+
+    @objc func openFilters() {
+        print("moral de mais")
     }
 
     func configureCollectionView() {

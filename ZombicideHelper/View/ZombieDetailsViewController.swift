@@ -35,6 +35,7 @@ class ZombieDetailsViewController: UIViewController {
         let view = UITextView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.font = UIFont.systemFont(ofSize: 20)
+        view.textAlignment = .natural
         view.layer.borderWidth = 1
         view.layer.cornerRadius = 5
         view.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.8)
