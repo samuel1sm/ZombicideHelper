@@ -10,14 +10,24 @@ import Foundation
 struct ZombiesInformationViewModel {
     private let zommbieFile = "ZombiesInfo"
     private let separator: String = ","
-    var zombiesList: [ZombieInformations]!
+    private var zombiesList: [ZombieInformations]!
+    var filteredList: [ZombieInformations]!
 
     init() {
-       zombiesList = readCsv(inputFile: zommbieFile, separator: separator)
+        zombiesList = readCsv(inputFile: zommbieFile, separator: separator)
+        filteredList = zombiesList
+    }
+
+    mutating func filterList (filter: String) {
+        if filter != "" {
+            filteredList = zombiesList.filter {$0.name.lowercased().contains(filter.lowercased())}
+        } else {
+            filteredList = zombiesList
+        }
     }
 
     func getZombieInformation(zombie: Int) -> ZombieInformations {
-        return zombiesList[zombie]
+        return filteredList[zombie]
     }
 
     private func readCsv(inputFile: String, separator: String) -> [ZombieInformations] {
