@@ -29,8 +29,6 @@ class FilterViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
 
-        let screenBounds = UIScreen.main.bounds
-
         title = "Filter"
         buildScreen()
 
