@@ -35,9 +35,13 @@ class FilterViewController: UIViewController {
     }
 
     func buildScreen() {
+        let lineView = UIView()
+        lineView.translatesAutoresizingMaskIntoConstraints = false
+        lineView.backgroundColor = .gray
 
         view.addSubview(filterTitleLabel)
         view.addSubview(gameFilterView)
+        view.addSubview(lineView)
 
         NSLayoutConstraint.activate([
             filterTitleLabel.topAnchor.constraint(equalTo: view.topAnchor),
@@ -48,7 +52,15 @@ class FilterViewController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            gameFilterView.topAnchor.constraint(equalTo: filterTitleLabel.bottomAnchor, constant: 20),
+            lineView.topAnchor.constraint(equalTo: filterTitleLabel.bottomAnchor),
+            lineView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            lineView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            lineView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            lineView.heightAnchor.constraint(equalToConstant: 1)
+        ])
+
+        NSLayoutConstraint.activate([
+            gameFilterView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: 20),
             gameFilterView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             gameFilterView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             gameFilterView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
