@@ -23,15 +23,21 @@ struct ZombiesInformationViewModel {
     }
 
     private func createFilterOtions() -> FilterOptions {
-        let gamesSet = Set(zombiesList.map { $0.game })
-        let zombieTypeSet = Set(zombiesList.map { $0.zombieType })
-        let minDamageDestroySet = Set(zombiesList.map { $0.status.minDamageDestroy })
-        let damageInflictedSet = Set(zombiesList.map { $0.status.damageInflicted })
-        let actionsSet = Set(zombiesList.map { $0.status.actions })
+        var gamesInfos = [String: Bool]()
+        var zombieTypeInfos = [String: Bool]()
+        var minDamageDestroyInfos = [String: Bool]()
+        var damageInflictedInfos = [String: Bool]()
+        var actionsInfos = [String: Bool]()
 
-        return FilterOptions(gamesSet: gamesSet, zombieTypeSet: zombieTypeSet,
-                             minDamageDestroySet: minDamageDestroySet, damageInflictedSet: damageInflictedSet,
-                             actionsSet: actionsSet)
+        zombiesList.forEach { gamesInfos[$0.game] = false}
+        zombiesList.forEach { zombieTypeInfos[$0.zombieType] = false}
+        zombiesList.forEach { minDamageDestroyInfos[$0.status.minDamageDestroy] = false}
+        zombiesList.forEach { damageInflictedInfos[$0.status.damageInflicted] = false}
+        zombiesList.forEach { actionsInfos[$0.status.actions] = false}
+
+        return FilterOptions(gamesInfos: gamesInfos, zombieTypeInfos: zombieTypeInfos,
+                             minDamageDestroyInfos: minDamageDestroyInfos, damageInflictedInfos: damageInflictedInfos,
+                             actionsInfos: actionsInfos)
     }
 
     mutating func filterList (filter: String) {
@@ -77,9 +83,9 @@ struct ZombiesInformationViewModel {
 }
 
 struct FilterOptions {
-    var gamesSet: Set<String>!
-    var zombieTypeSet: Set<String>!
-    var minDamageDestroySet: Set<String>!
-    var damageInflictedSet: Set<String>!
-    var actionsSet: Set<String>!
+    var gamesInfos: [String: Bool]!
+    var zombieTypeInfos: [String: Bool]!
+    var minDamageDestroyInfos: [String: Bool]!
+    var damageInflictedInfos: [String: Bool]!
+    var actionsInfos: [String: Bool]!
 }
