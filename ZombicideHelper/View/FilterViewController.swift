@@ -8,22 +8,7 @@
 import UIKit
 
 class FilterViewController: UIViewController {
-    let filterTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        label.text = "Filter"
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    let gameFilterView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 10
-        return view
-    }()
+    var filterOptins: FilterOptions!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,17 +16,21 @@ class FilterViewController: UIViewController {
 
         title = "Filter"
         buildScreen()
-
     }
 
     func buildScreen() {
-        let lineView = UIView()
-        lineView.translatesAutoresizingMaskIntoConstraints = false
-        lineView.backgroundColor = .gray
+        let filterTitleLabel = UIView.createHeaderView(text: "Filters")
+        let actionsFilterArea = buildSimpleFiltersArea(title: "Actions",
+                                                       buttonTexts: sortKeys(filterOptins.actionsInfos))
+        let lifeFilterArea = buildSimpleFiltersArea(title: "Life",
+                                                    buttonTexts: sortKeys(filterOptins.minDamageDestroyInfos))
+        let damageFilterArea = buildSimpleFiltersArea(title: "Damage",
+                                                      buttonTexts: sortKeys(filterOptins.damageInflictedInfos))
 
         view.addSubview(filterTitleLabel)
-        view.addSubview(gameFilterView)
-        view.addSubview(lineView)
+        view.addSubview(actionsFilterArea)
+        view.addSubview(lifeFilterArea)
+        view.addSubview(damageFilterArea)
 
         NSLayoutConstraint.activate([
             filterTitleLabel.topAnchor.constraint(equalTo: view.topAnchor),
@@ -52,21 +41,75 @@ class FilterViewController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            lineView.topAnchor.constraint(equalTo: filterTitleLabel.bottomAnchor),
-            lineView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            lineView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            lineView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            lineView.heightAnchor.constraint(equalToConstant: 1)
+            lifeFilterArea.topAnchor.constraint(equalTo: filterTitleLabel.bottomAnchor, constant: 20),
+            lifeFilterArea.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            lifeFilterArea.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            lifeFilterArea.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            lifeFilterArea.heightAnchor.constraint(equalToConstant: 80)
         ])
 
         NSLayoutConstraint.activate([
-            gameFilterView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: 20),
-            gameFilterView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            gameFilterView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            gameFilterView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            gameFilterView.heightAnchor.constraint(equalToConstant: 200)
+            actionsFilterArea.topAnchor.constraint(equalTo: lifeFilterArea.bottomAnchor, constant: 20),
+            actionsFilterArea.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            actionsFilterArea.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                                        constant: -20),
+            actionsFilterArea.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            actionsFilterArea.heightAnchor.constraint(equalToConstant: 80)
         ])
 
+        NSLayoutConstraint.activate([
+            damageFilterArea.topAnchor.constraint(equalTo: actionsFilterArea.bottomAnchor, constant: 20),
+            damageFilterArea.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            damageFilterArea.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            damageFilterArea.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            damageFilterArea.heightAnchor.constraint(equalToConstant: 80)
+        ])
+
+    }
+
+    func buildSimpleFiltersArea(title: String, buttonTexts: [String]) -> UIView {
+        let view = buildFilterView()
+
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .horizontal
+        stack.spacing = 6
+
+        buttonTexts.forEach {stack.addArrangedSubview(UIButton.createFilterButton(text: $0))}
+
+        let header = UIView.createHeaderView(text: title, fontSize: 16)
+        view.addSubview(header)
+        view.addSubview(stack)
+
+        NSLayoutConstraint.activate([
+            header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            header.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            header.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            header.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            header.heightAnchor.constraint(equalToConstant: 26)
+        ])
+
+        NSLayoutConstraint.activate([
+            stack.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 10),
+            stack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            stack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            stack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            stack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+
+        return view
+    }
+
+    private func buildFilterView() -> UIView {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+        view.layer.cornerRadius = 10
+        return view
+    }
+
+    private func sortKeys(_ buttonTexts: [String: Bool]) -> [String] {
+        return Array(buttonTexts.keys).sorted(by: <)
     }
 
 }
@@ -74,6 +117,7 @@ class FilterViewController: UIViewController {
 extension UIView {
     static func createHeaderView(text: String, fontSize: CGFloat = 18, labelHeight: CGFloat = 44,
                                  translatesAutoresizingMaskIntoConstraints: Bool = false) -> UIView {
+
         let resultView = UIView()
         resultView.translatesAutoresizingMaskIntoConstraints = translatesAutoresizingMaskIntoConstraints
 
