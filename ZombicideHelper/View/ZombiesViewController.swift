@@ -45,6 +45,7 @@ class ZombiesViewController: UIViewController {
 
     @objc func openFilters() {
         let filterView = FilterViewController()
+        filterView.filterOptins = zombiesViewModel.filterOptions
 //        filterView.modalPresentationStyle = .fullScreen
         present(filterView, animated: true, completion: nil)
     }
@@ -135,7 +136,6 @@ extension ZombiesViewController: UICollectionViewDataSource {
 extension ZombiesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailView = ZombieDetailsViewController()
-        //        detailView.modalPresentationStyle = .fullScreen
         detailView.zombieInformation = zombiesViewModel.getZombieInformation(zombie: indexPath.row)
         present(detailView, animated: true, completion: nil)
     }
