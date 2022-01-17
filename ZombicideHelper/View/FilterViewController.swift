@@ -70,3 +70,58 @@ class FilterViewController: UIViewController {
     }
 
 }
+
+extension UIView {
+    static func createHeaderView(text: String, fontSize: CGFloat = 18, labelHeight: CGFloat = 44,
+                                 translatesAutoresizingMaskIntoConstraints: Bool = false) -> UIView {
+        let resultView = UIView()
+        resultView.translatesAutoresizingMaskIntoConstraints = translatesAutoresizingMaskIntoConstraints
+
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: fontSize, weight: .semibold)
+        label.text = text
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+
+        let lineView = UIView()
+        lineView.translatesAutoresizingMaskIntoConstraints = false
+        lineView.backgroundColor = .gray
+
+        resultView.addSubview(label)
+        resultView.addSubview(lineView)
+
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: resultView.topAnchor),
+            label.leadingAnchor.constraint(equalTo: resultView.leadingAnchor),
+            label.trailingAnchor.constraint(equalTo: resultView.trailingAnchor),
+            label.centerXAnchor.constraint(equalTo: resultView.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: resultView.centerYAnchor, constant: -1)
+        ])
+
+        NSLayoutConstraint.activate([
+            lineView.bottomAnchor.constraint(equalTo: resultView.bottomAnchor),
+            lineView.leadingAnchor.constraint(equalTo: resultView.leadingAnchor),
+            lineView.trailingAnchor.constraint(equalTo: resultView.trailingAnchor),
+            lineView.centerXAnchor.constraint(equalTo: resultView.centerXAnchor),
+            lineView.heightAnchor.constraint(equalToConstant: 1)
+        ])
+
+        return resultView
+    }
+}
+
+extension UIButton {
+    static func createFilterButton(text: String) -> UIButton {
+        var config = UIButton.Configuration.borderless()
+        config.titlePadding = 20
+        let view = UIButton(configuration: config, primaryAction: nil)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderColor = UIColor(named: Constants.invertedColor)?.cgColor
+        view.layer.cornerRadius = 4
+        view.layer.borderWidth = 2
+        view.setTitleColor(UIColor.white, for: .normal)
+        view.titleLabel?.font = UIFont.systemFont(ofSize: 40)
+        view.setTitle(text, for: .normal)
+        return view
+    }
+}
