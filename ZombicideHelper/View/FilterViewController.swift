@@ -94,7 +94,6 @@ class FilterViewController: UIViewController {
     func buildSimpleFiltersArea(title: String, buttonTexts: [String],
                                 distribution: UIStackView.Distribution = .fillEqually) -> UIView {
         let view = buildFilterView()
-        view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.1)
         let stack = UIStackView.filterStack(distribution: distribution)
 
         buttonTexts.forEach {stack.addArrangedSubview(UIButton.createFilterButton(text: $0))}
@@ -124,8 +123,6 @@ class FilterViewController: UIViewController {
 
     func buildLargerFiltersArea(title: String, buttonTexts: [String]) -> UIView {
         let view = buildFilterView()
-        view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.1)
-
         let mainStack = UIStackView()
         mainStack.translatesAutoresizingMaskIntoConstraints = false
         mainStack.axis = .vertical
@@ -169,7 +166,7 @@ class FilterViewController: UIViewController {
     private func buildFilterView() -> UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+        view.backgroundColor = UIColor(named: Constants.filterBackground)
         view.layer.cornerRadius = 10
         return view
     }
