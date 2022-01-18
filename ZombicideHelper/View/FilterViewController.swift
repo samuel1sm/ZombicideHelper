@@ -30,7 +30,7 @@ class FilterViewController: UIViewController {
         let zombieFilterArea = buildSimpleFiltersArea(title: "Type",
                                                       buttonTexts: sortKeys(filterOptins.zombieTypeInfos), distribution: .fillProportionally)
 
-        let expationFilterArea = buildLargerFiltersArea(title: "Expantion",
+        let expationFilterArea = buildLargerFiltersArea(title: "Expantions",
                                                         buttonTexts: sortKeys(filterOptins.gamesInfos))
 
         view.addSubview(filterTitleLabel)
@@ -53,28 +53,28 @@ class FilterViewController: UIViewController {
             lifeFilterArea.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             lifeFilterArea.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             lifeFilterArea.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            lifeFilterArea.heightAnchor.constraint(equalToConstant: 80)
+            lifeFilterArea.heightAnchor.constraint(equalToConstant: 72)
         ])
 
         NSLayoutConstraint.activate([
-            actionsFilterArea.topAnchor.constraint(equalTo: lifeFilterArea.bottomAnchor, constant: 20),
+            actionsFilterArea.topAnchor.constraint(equalTo: lifeFilterArea.bottomAnchor, constant: 10),
             actionsFilterArea.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             actionsFilterArea.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
                                                         constant: -20),
             actionsFilterArea.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            actionsFilterArea.heightAnchor.constraint(equalToConstant: 80)
+            actionsFilterArea.heightAnchor.constraint(equalToConstant: 72)
         ])
 
         NSLayoutConstraint.activate([
-            damageFilterArea.topAnchor.constraint(equalTo: actionsFilterArea.bottomAnchor, constant: 20),
+            damageFilterArea.topAnchor.constraint(equalTo: actionsFilterArea.bottomAnchor, constant: 10),
             damageFilterArea.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             damageFilterArea.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             damageFilterArea.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            damageFilterArea.heightAnchor.constraint(equalToConstant: 80)
+            damageFilterArea.heightAnchor.constraint(equalToConstant: 72)
         ])
 
         NSLayoutConstraint.activate([
-            zombieFilterArea.topAnchor.constraint(equalTo: damageFilterArea.bottomAnchor, constant: 20),
+            zombieFilterArea.topAnchor.constraint(equalTo: damageFilterArea.bottomAnchor, constant: 10),
             zombieFilterArea.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             zombieFilterArea.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             zombieFilterArea.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -82,7 +82,7 @@ class FilterViewController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            expationFilterArea.topAnchor.constraint(equalTo: zombieFilterArea.bottomAnchor, constant: 20),
+            expationFilterArea.topAnchor.constraint(equalTo: zombieFilterArea.bottomAnchor, constant: 10),
             expationFilterArea.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             expationFilterArea.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             expationFilterArea.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -94,7 +94,7 @@ class FilterViewController: UIViewController {
     func buildSimpleFiltersArea(title: String, buttonTexts: [String],
                                 distribution: UIStackView.Distribution = .fillEqually) -> UIView {
         let view = buildFilterView()
-
+        view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.1)
         let stack = UIStackView.filterStack(distribution: distribution)
 
         buttonTexts.forEach {stack.addArrangedSubview(UIButton.createFilterButton(text: $0))}
@@ -124,6 +124,7 @@ class FilterViewController: UIViewController {
 
     func buildLargerFiltersArea(title: String, buttonTexts: [String]) -> UIView {
         let view = buildFilterView()
+        view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.1)
 
         let mainStack = UIStackView()
         mainStack.translatesAutoresizingMaskIntoConstraints = false
@@ -131,8 +132,8 @@ class FilterViewController: UIViewController {
         mainStack.distribution = .fillProportionally
         mainStack.spacing = 3
 
-        let stacks = Array(0..<5).map { _ -> UIStackView in
-            let stack = UIStackView.filterStack(distribution: .fillProportionally)
+        let stacks = Array(0..<6).map { _ -> UIStackView in
+            let stack = UIStackView.filterStack()
             mainStack.addArrangedSubview(stack)
             return stack
         }
@@ -141,8 +142,6 @@ class FilterViewController: UIViewController {
             let module = index % stacks.count
             stacks[module].addArrangedSubview(UIButton.createFilterButton(text: name))
         }
-
-//        buttonTexts.forEach {mainStack.addArrangedSubview(UIButton.createFilterButton(text: $0))}
 
         let header = UIView.createHeaderView(text: title, fontSize: 16)
         view.addSubview(header)
@@ -234,7 +233,7 @@ extension UIView {
 }
 
 extension UIButton {
-    static func createFilterButton(text: String) -> UIButton {
+    static func createFilterButton(text: String, fontSize: CGFloat = 16) -> UIButton {
         var config = UIButton.Configuration.borderless()
         config.titlePadding = 20
         let view = UIButton(configuration: config, primaryAction: nil)
@@ -243,7 +242,8 @@ extension UIButton {
         view.layer.cornerRadius = 4
         view.layer.borderWidth = 2
         view.setTitleColor(UIColor.white, for: .normal)
-        view.titleLabel?.font = UIFont.systemFont(ofSize: 40)
+        view.titleLabel?.textAlignment = .center
+        view.titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
         view.setTitle(text, for: .normal)
         return view
     }
