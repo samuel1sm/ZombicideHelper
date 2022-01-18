@@ -27,10 +27,18 @@ class FilterViewController: UIViewController {
         let damageFilterArea = buildSimpleFiltersArea(title: "Damage",
                                                       buttonTexts: sortKeys(filterOptins.damageInflictedInfos))
 
+        let zombieFilterArea = buildSimpleFiltersArea(title: "Type",
+                                                      buttonTexts: sortKeys(filterOptins.zombieTypeInfos), distribution: .fillProportionally)
+
+        let expationFilterArea = buildLargerFiltersArea(title: "Expantion",
+                                                        buttonTexts: sortKeys(filterOptins.gamesInfos))
+
         view.addSubview(filterTitleLabel)
         view.addSubview(actionsFilterArea)
         view.addSubview(lifeFilterArea)
         view.addSubview(damageFilterArea)
+        view.addSubview(zombieFilterArea)
+        view.addSubview(expationFilterArea)
 
         NSLayoutConstraint.activate([
             filterTitleLabel.topAnchor.constraint(equalTo: view.topAnchor),
@@ -65,15 +73,29 @@ class FilterViewController: UIViewController {
             damageFilterArea.heightAnchor.constraint(equalToConstant: 80)
         ])
 
+        NSLayoutConstraint.activate([
+            zombieFilterArea.topAnchor.constraint(equalTo: damageFilterArea.bottomAnchor, constant: 20),
+            zombieFilterArea.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            zombieFilterArea.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            zombieFilterArea.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            zombieFilterArea.heightAnchor.constraint(equalToConstant: 80)
+        ])
+
+        NSLayoutConstraint.activate([
+            expationFilterArea.topAnchor.constraint(equalTo: zombieFilterArea.bottomAnchor, constant: 20),
+            expationFilterArea.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            expationFilterArea.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            expationFilterArea.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            expationFilterArea.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        ])
+
     }
 
-    func buildSimpleFiltersArea(title: String, buttonTexts: [String]) -> UIView {
+    func buildSimpleFiltersArea(title: String, buttonTexts: [String],
+                                distribution: UIStackView.Distribution = .fillEqually) -> UIView {
         let view = buildFilterView()
 
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .horizontal
-        stack.spacing = 6
+        let stack = UIStackView.filterStack(distribution: distribution)
 
         buttonTexts.forEach {stack.addArrangedSubview(UIButton.createFilterButton(text: $0))}
 
@@ -100,6 +122,51 @@ class FilterViewController: UIViewController {
         return view
     }
 
+    func buildLargerFiltersArea(title: String, buttonTexts: [String]) -> UIView {
+        let view = buildFilterView()
+
+        let mainStack = UIStackView()
+        mainStack.translatesAutoresizingMaskIntoConstraints = false
+        mainStack.axis = .vertical
+        mainStack.distribution = .fillProportionally
+        mainStack.spacing = 3
+
+        let stacks = Array(0..<5).map { _ -> UIStackView in
+            let stack = UIStackView.filterStack(distribution: .fillProportionally)
+            mainStack.addArrangedSubview(stack)
+            return stack
+        }
+
+        for (index, name) in buttonTexts.enumerated() {
+            let module = index % stacks.count
+            stacks[module].addArrangedSubview(UIButton.createFilterButton(text: name))
+        }
+
+//        buttonTexts.forEach {mainStack.addArrangedSubview(UIButton.createFilterButton(text: $0))}
+
+        let header = UIView.createHeaderView(text: title, fontSize: 16)
+        view.addSubview(header)
+        view.addSubview(mainStack)
+
+        NSLayoutConstraint.activate([
+            header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            header.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            header.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            header.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            header.heightAnchor.constraint(equalToConstant: 26)
+        ])
+
+        NSLayoutConstraint.activate([
+            mainStack.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 10),
+            mainStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            mainStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            mainStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            mainStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+
+        return view
+    }
+
     private func buildFilterView() -> UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -114,12 +181,24 @@ class FilterViewController: UIViewController {
 
 }
 
+extension UIStackView {
+    static func filterStack(spacing: CGFloat = 6, distribution: UIStackView.Distribution = .fillEqually,
+                            maskIntoConstraints: Bool = false) -> UIStackView {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = maskIntoConstraints
+        stack.axis = .horizontal
+        stack.distribution = distribution
+        stack.spacing = spacing
+        return stack
+    }
+}
+
 extension UIView {
     static func createHeaderView(text: String, fontSize: CGFloat = 18, labelHeight: CGFloat = 44,
-                                 translatesAutoresizingMaskIntoConstraints: Bool = false) -> UIView {
+                                 maskIntoConstraints: Bool = false) -> UIView {
 
         let resultView = UIView()
-        resultView.translatesAutoresizingMaskIntoConstraints = translatesAutoresizingMaskIntoConstraints
+        resultView.translatesAutoresizingMaskIntoConstraints = maskIntoConstraints
 
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: fontSize, weight: .semibold)
