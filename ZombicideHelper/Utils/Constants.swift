@@ -13,4 +13,11 @@ struct Constants {
     static let invertedColor = "InvertedColor"
     static let filterBackground = "FilterBackground"
 
+    struct Filters {
+        static let actions = "Actions"
+        static let life = "Life"
+        static let damage = "Damage"
+        static let type = "Type"
+        static let expantions = "Expantions"
+    }
 }
