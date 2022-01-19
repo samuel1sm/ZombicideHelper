@@ -6,13 +6,15 @@
 //
 
 import Foundation
+import Combine
+import UIKit
 
-struct ZombiesInformationViewModel {
+class ZombiesInformationViewModel {
     private let zommbieFile = "ZombiesInfo"
     private let separator: String = ","
     private var zombiesList: [ZombieInformations]!
     var filteredList: [ZombieInformations]!
-    var filterOptions: FilterOptions!
+    @Published private(set) var filterOptions: FilterOptions!
 
     init() {
         zombiesList = readCsv(inputFile: zommbieFile, separator: separator)
@@ -39,8 +41,21 @@ struct ZombiesInformationViewModel {
                              minDamageDestroyInfos: minDamageDestroyInfos, damageInflictedInfos: damageInflictedInfos,
                              actionsInfos: actionsInfos)
     }
+    
+    func updateFilter(filter: String, key : String){
+        switch (filter){
+            case "type":
+                filterOptions.zombieTypeInfos[key] = !filterOptions.zombieTypeInfos[key]!
+                break
+        case "damage":
+                filterOptions.damageInflictedInfos[key] = !filterOptions.damageInflictedInfos[key]!
+                break
+        default:
+            print("")
+        }
+    }
 
-    mutating func filterList (filter: String) {
+    func filterList (filter: String) {
         if filter != "" {
             filteredList = zombiesList.filter {$0.name.lowercased().contains(filter.lowercased())}
         } else {

@@ -6,11 +6,13 @@
 //
 
 import UIKit
-
+import Combine
 class ZombiesViewController: UIViewController {
 
     let cellPerRoll: CGFloat = 2
     var zombiesViewModel = ZombiesInformationViewModel()
+    private var subscriptions = Set<AnyCancellable>()
+
     let searchBar: UISearchBar = {
         let view = UISearchBar()
         view.placeholder = " Search..."
@@ -29,6 +31,10 @@ class ZombiesViewController: UIViewController {
                                                             style: .done, target: self, action: #selector(openFilters))
 
         view.backgroundColor = .systemBackground
+
+        self.zombiesViewModel.$filterOptions.sink { filter in
+            print(filter?.zombieTypeInfos)
+        }.store(in: &subscriptions)
 
         tapGesture = UITapGestureRecognizer(target: self,
                          action: #selector(hideKeyboard))
