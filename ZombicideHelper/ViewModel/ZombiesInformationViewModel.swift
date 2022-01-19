@@ -41,15 +41,13 @@ class ZombiesInformationViewModel {
                              minDamageDestroyInfos: minDamageDestroyInfos, damageInflictedInfos: damageInflictedInfos,
                              actionsInfos: actionsInfos)
     }
-    
-    func updateFilter(filter: String, key : String){
-        switch (filter){
-            case "type":
-                filterOptions.zombieTypeInfos[key] = !filterOptions.zombieTypeInfos[key]!
-                break
-        case "damage":
-                filterOptions.damageInflictedInfos[key] = !filterOptions.damageInflictedInfos[key]!
-                break
+
+    func updateFilter(filter: String, key: String) {
+        switch filter {
+        case Constants.Filters.type:
+            filterOptions.zombieTypeInfos[key] = !filterOptions.zombieTypeInfos[key]!
+        case Constants.Filters.type:
+            filterOptions.damageInflictedInfos[key] = !filterOptions.damageInflictedInfos[key]!
         default:
             print("")
         }
