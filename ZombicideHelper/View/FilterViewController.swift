@@ -9,6 +9,7 @@ import UIKit
 
 class FilterViewController: UIViewController {
     var filterOptins: FilterOptions!
+    var viewModel: ZombiesInformationViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,17 +21,18 @@ class FilterViewController: UIViewController {
 
     func buildScreen() {
         let filterTitleLabel = UIView.createHeaderView(text: "Filters")
-        let actionsFilterArea = buildSimpleFiltersArea(title: "Actions",
+        let actionsFilterArea = buildSimpleFiltersArea(title: Constants.Filters.actions,
                                                        buttonTexts: sortKeys(filterOptins.actionsInfos))
-        let lifeFilterArea = buildSimpleFiltersArea(title: "Life",
+        let lifeFilterArea = buildSimpleFiltersArea(title: Constants.Filters.life,
                                                     buttonTexts: sortKeys(filterOptins.minDamageDestroyInfos))
-        let damageFilterArea = buildSimpleFiltersArea(title: "Damage",
+        let damageFilterArea = buildSimpleFiltersArea(title: Constants.Filters.damage,
                                                       buttonTexts: sortKeys(filterOptins.damageInflictedInfos))
 
-        let zombieFilterArea = buildSimpleFiltersArea(title: "Type",
-                                                      buttonTexts: sortKeys(filterOptins.zombieTypeInfos), distribution: .fillProportionally)
+        let zombieFilterArea = buildSimpleFiltersArea(title: Constants.Filters.type,
+                                                      buttonTexts: sortKeys(filterOptins.zombieTypeInfos),
+                                                      distribution: .fillProportionally)
 
-        let expationFilterArea = buildLargerFiltersArea(title: "Expantions",
+        let expationFilterArea = buildLargerFiltersArea(title: Constants.Filters.type,
                                                         buttonTexts: sortKeys(filterOptins.gamesInfos))
 
         view.addSubview(filterTitleLabel)
@@ -84,7 +86,8 @@ class FilterViewController: UIViewController {
         NSLayoutConstraint.activate([
             expationFilterArea.topAnchor.constraint(equalTo: zombieFilterArea.bottomAnchor, constant: 10),
             expationFilterArea.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            expationFilterArea.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            expationFilterArea.trailingAnchor
+                .constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             expationFilterArea.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             expationFilterArea.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
@@ -96,7 +99,7 @@ class FilterViewController: UIViewController {
         let view = buildFilterView()
         let stack = UIStackView.filterStack(distribution: distribution)
 
-        buttonTexts.forEach {stack.addArrangedSubview(UIButton.createFilterButton(text: $0))}
+        buttonTexts.forEach {stack.addArrangedSubview(FilterButton.standartConfig(title: $0, filterType: title))}
 
         let header = UIView.createHeaderView(text: title, fontSize: 16)
         view.addSubview(header)
@@ -137,7 +140,7 @@ class FilterViewController: UIViewController {
 
         for (index, name) in buttonTexts.enumerated() {
             let module = index % stacks.count
-            stacks[module].addArrangedSubview(UIButton.createFilterButton(text: name))
+            stacks[module].addArrangedSubview(FilterButton.standartConfig(title: name, filterType: title))
         }
 
         let header = UIView.createHeaderView(text: title, fontSize: 16)
@@ -173,6 +176,10 @@ class FilterViewController: UIViewController {
 
     private func sortKeys(_ buttonTexts: [String: Bool]) -> [String] {
         return Array(buttonTexts.keys).sorted(by: <)
+    }
+
+    @objc func onFilterPressed(_ sender: UIButton!, filter: String) {
+        viewModel.updateFilter(filter: filter, key: sender.titleLabel!.text! )
     }
 
 }
@@ -226,22 +233,5 @@ extension UIView {
         ])
 
         return resultView
-    }
-}
-
-extension UIButton {
-    static func createFilterButton(text: String, fontSize: CGFloat = 16) -> UIButton {
-        var config = UIButton.Configuration.borderless()
-        config.titlePadding = 20
-        let view = UIButton(configuration: config, primaryAction: nil)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.borderColor = UIColor(named: Constants.invertedColor)?.cgColor
-        view.layer.cornerRadius = 4
-        view.layer.borderWidth = 2
-        view.setTitleColor(UIColor.white, for: .normal)
-        view.titleLabel?.textAlignment = .center
-        view.titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
-        view.setTitle(text, for: .normal)
-        return view
     }
 }
