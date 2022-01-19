@@ -19,6 +19,7 @@
 		00AD4DC32752ED9800F67123 /* ZombieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD4DC22752ED9800F67123 /* ZombieDetailsViewController.swift */; };
 		00BCA54C274473B700910909 /* ZombieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCA54B274473B700910909 /* ZombieCollectionViewCell.swift */; };
 		00BCA57427498E5000910909 /* ZombieInformations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCA57327498E5000910909 /* ZombieInformations.swift */; };
+		00DF414B2798A868009BF832 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DF414A2798A868009BF832 /* FilterButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		00AD4DC22752ED9800F67123 /* ZombieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombieDetailsViewController.swift; sourceTree = "<group>"; };
 		00BCA54B274473B700910909 /* ZombieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombieCollectionViewCell.swift; sourceTree = "<group>"; };
 		00BCA57327498E5000910909 /* ZombieInformations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombieInformations.swift; sourceTree = "<group>"; };
+		00DF414A2798A868009BF832 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				00BCA54B274473B700910909 /* ZombieCollectionViewCell.swift */,
+				00DF414A2798A868009BF832 /* FilterButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				003B7FCD274458FB007B1F2C /* AppDelegate.swift in Sources */,
 				00AD4DC32752ED9800F67123 /* ZombieDetailsViewController.swift in Sources */,
 				003B7FCF274458FB007B1F2C /* SceneDelegate.swift in Sources */,
+				00DF414B2798A868009BF832 /* FilterButton.swift in Sources */,
 				00BCA57427498E5000910909 /* ZombieInformations.swift in Sources */,
 				006787C5278EF88C00B09426 /* Constants.swift in Sources */,
 			);
