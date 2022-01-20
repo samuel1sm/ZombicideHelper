@@ -32,10 +32,6 @@ class ZombiesViewController: UIViewController {
 
         view.backgroundColor = .systemBackground
 
-        self.zombiesViewModel.$filterOptions.sink { filter in
-            print(filter?.zombieTypeInfos)
-        }.store(in: &subscriptions)
-
         tapGesture = UITapGestureRecognizer(target: self,
                          action: #selector(hideKeyboard))
 
@@ -44,15 +40,36 @@ class ZombiesViewController: UIViewController {
         myCollectionView.dataSource = self
         myCollectionView.delegate = self
         searchBar.delegate = self
-
+        configureObservables()
         buildScreen()
 
     }
 
+    func configureObservables() {
+        self.zombiesViewModel.filterOptions.$actions.sink { data in
+            print(data)
+        }.store(in: &subscriptions)
+
+        self.zombiesViewModel.filterOptions.$gamesInfos.sink { data in
+            print(data)
+        }.store(in: &subscriptions)
+
+        self.zombiesViewModel.filterOptions.$damage.sink { data in
+            print(data)
+        }.store(in: &subscriptions)
+
+        self.zombiesViewModel.filterOptions.$zombieType.sink { data in
+            print(data)
+        }.store(in: &subscriptions)
+
+        self.zombiesViewModel.filterOptions.$life.sink { data in
+            print(data)
+        }.store(in: &subscriptions)
+    }
+
     @objc func openFilters() {
         let filterView = FilterViewController()
-        filterView.filterOptins = zombiesViewModel.filterOptions
-//        filterView.modalPresentationStyle = .fullScreen
+        filterView.viewModel = zombiesViewModel
         present(filterView, animated: true, completion: nil)
     }
 

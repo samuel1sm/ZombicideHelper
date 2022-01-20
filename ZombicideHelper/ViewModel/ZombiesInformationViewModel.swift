@@ -5,7 +5,6 @@
 //  Created by FRANCISCO SAMUEL DA SILVA MARTINS on 26/11/21.
 //
 
-import Foundation
 import Combine
 import UIKit
 
@@ -14,14 +13,13 @@ class ZombiesInformationViewModel {
     private let separator: String = ","
     private var zombiesList: [ZombieInformations]!
     var filteredList: [ZombieInformations]!
-    @Published private(set) var filterOptions: FilterOptions!
+    private(set) var filterOptions: FilterOptions!
 
     init() {
         zombiesList = readCsv(inputFile: zommbieFile, separator: separator)
         filteredList = zombiesList
 
         filterOptions = createFilterOtions()
-
     }
 
     private func createFilterOtions() -> FilterOptions {
@@ -37,20 +35,34 @@ class ZombiesInformationViewModel {
         zombiesList.forEach { damageInflictedInfos[$0.status.damageInflicted] = false}
         zombiesList.forEach { actionsInfos[$0.status.actions] = false}
 
-        return FilterOptions(gamesInfos: gamesInfos, zombieTypeInfos: zombieTypeInfos,
-                             minDamageDestroyInfos: minDamageDestroyInfos, damageInflictedInfos: damageInflictedInfos,
-                             actionsInfos: actionsInfos)
+        return FilterOptions(gamesInfos: gamesInfos, zombieType: zombieTypeInfos,
+                             life: minDamageDestroyInfos, damage: damageInflictedInfos,
+                             actions: actionsInfos)
     }
 
-    func updateFilter(filter: String, key: String) {
+    func updateFilter(filter: String, key: String) -> Bool {
+        var value: Bool!
         switch filter {
         case Constants.Filters.type:
-            filterOptions.zombieTypeInfos[key] = !filterOptions.zombieTypeInfos[key]!
-        case Constants.Filters.type:
-            filterOptions.damageInflictedInfos[key] = !filterOptions.damageInflictedInfos[key]!
+            value = !filterOptions.zombieType[key]!
+            filterOptions.zombieType[key] = value
+        case Constants.Filters.damage:
+            value = !filterOptions.damage[key]!
+            filterOptions.damage[key] = value
+        case Constants.Filters.actions:
+            value = !filterOptions.actions[key]!
+            filterOptions.actions[key] = value
+        case Constants.Filters.expantions:
+            value = !filterOptions.gamesInfos[key]!
+            filterOptions.gamesInfos[key] = value
+        case Constants.Filters.life:
+            value = !filterOptions.life[key]!
+            filterOptions.life[key] = value
         default:
             print("")
         }
+
+        return value
     }
 
     func filterList (filter: String) {
@@ -95,10 +107,20 @@ class ZombiesInformationViewModel {
     }
 }
 
-struct FilterOptions {
-    var gamesInfos: [String: Bool]!
-    var zombieTypeInfos: [String: Bool]!
-    var minDamageDestroyInfos: [String: Bool]!
-    var damageInflictedInfos: [String: Bool]!
-    var actionsInfos: [String: Bool]!
+class FilterOptions {
+    @Published var gamesInfos: [String: Bool]!
+    @Published var zombieType: [String: Bool]!
+    @Published var life: [String: Bool]!
+    @Published var damage: [String: Bool]!
+    @Published var actions: [String: Bool]!
+
+    init(gamesInfos: [String: Bool]!, zombieType: [String: Bool]!,
+         life: [String: Bool]!, damage: [String: Bool]!,
+         actions: [String: Bool]!) {
+        self.gamesInfos = gamesInfos
+        self.actions = actions
+        self.zombieType = zombieType
+        self.damage = damage
+        self.life = life
+    }
 }

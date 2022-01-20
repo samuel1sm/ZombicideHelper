@@ -8,7 +8,6 @@
 import UIKit
 
 class FilterViewController: UIViewController {
-    var filterOptins: FilterOptions!
     var viewModel: ZombiesInformationViewModel!
 
     override func viewDidLoad() {
@@ -22,18 +21,23 @@ class FilterViewController: UIViewController {
     func buildScreen() {
         let filterTitleLabel = UIView.createHeaderView(text: "Filters")
         let actionsFilterArea = buildSimpleFiltersArea(title: Constants.Filters.actions,
-                                                       buttonTexts: sortKeys(filterOptins.actionsInfos))
+                                                       buttonTexts:
+                                                        sortKeys(viewModel.filterOptions.actions))
+
         let lifeFilterArea = buildSimpleFiltersArea(title: Constants.Filters.life,
-                                                    buttonTexts: sortKeys(filterOptins.minDamageDestroyInfos))
+                                                    buttonTexts:
+                                                        sortKeys(viewModel.filterOptions.life))
+
         let damageFilterArea = buildSimpleFiltersArea(title: Constants.Filters.damage,
-                                                      buttonTexts: sortKeys(filterOptins.damageInflictedInfos))
+                                                      buttonTexts:
+                                                        sortKeys(viewModel.filterOptions.damage))
 
         let zombieFilterArea = buildSimpleFiltersArea(title: Constants.Filters.type,
-                                                      buttonTexts: sortKeys(filterOptins.zombieTypeInfos),
+                                                      buttonTexts: sortKeys(viewModel.filterOptions.zombieType),
                                                       distribution: .fillProportionally)
 
-        let expationFilterArea = buildLargerFiltersArea(title: Constants.Filters.type,
-                                                        buttonTexts: sortKeys(filterOptins.gamesInfos))
+        let expationFilterArea = buildLargerFiltersArea(title: Constants.Filters.expantions,
+                                                        buttonTexts: sortKeys(viewModel.filterOptions.gamesInfos))
 
         view.addSubview(filterTitleLabel)
         view.addSubview(actionsFilterArea)
@@ -99,7 +103,11 @@ class FilterViewController: UIViewController {
         let view = buildFilterView()
         let stack = UIStackView.filterStack(distribution: distribution)
 
-        buttonTexts.forEach {stack.addArrangedSubview(FilterButton.standartConfig(title: $0, filterType: title))}
+        buttonTexts.forEach {
+            let button = FilterButton.standartConfig(title: $0, filterType: title)
+            button.addTarget(self, action: #selector(onFilterPressed), for: .touchUpInside)
+            stack.addArrangedSubview(button)
+        }
 
         let header = UIView.createHeaderView(text: title, fontSize: 16)
         view.addSubview(header)
@@ -140,7 +148,9 @@ class FilterViewController: UIViewController {
 
         for (index, name) in buttonTexts.enumerated() {
             let module = index % stacks.count
-            stacks[module].addArrangedSubview(FilterButton.standartConfig(title: name, filterType: title))
+            let button = FilterButton.standartConfig(title: name, filterType: title)
+            button.addTarget(self, action: #selector(onFilterPressed), for: .touchUpInside)
+            stacks[module].addArrangedSubview(button)
         }
 
         let header = UIView.createHeaderView(text: title, fontSize: 16)
@@ -178,8 +188,9 @@ class FilterViewController: UIViewController {
         return Array(buttonTexts.keys).sorted(by: <)
     }
 
-    @objc func onFilterPressed(_ sender: UIButton!, filter: String) {
-        viewModel.updateFilter(filter: filter, key: sender.titleLabel!.text! )
+    @objc func onFilterPressed(_ sender: FilterButton!) {
+        let result = viewModel.updateFilter(filter: sender.filterType, key: sender.titleLabel!.text! )
+
     }
 
 }
