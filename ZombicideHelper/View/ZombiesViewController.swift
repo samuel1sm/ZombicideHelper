@@ -10,8 +10,19 @@ import Combine
 class ZombiesViewController: UIViewController {
 
     let cellPerRoll: CGFloat = 2
-    var zombiesViewModel = ZombiesInformationViewModel()
+    let zombiesViewModel = ZombiesInformationViewModel()
     private var subscriptions = Set<AnyCancellable>()
+    var filterSize: CGFloat = 0
+
+    let filtersStack: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 8
+        view.alignment = .fill
+        view.distribution = .fillProportionally
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     let searchBar: UISearchBar = {
         let view = UISearchBar()
@@ -87,15 +98,38 @@ class ZombiesViewController: UIViewController {
         myCollectionView.register(ZombieCollectionViewCell.self,
                                   forCellWithReuseIdentifier: ZombieCollectionViewCell.indentifier)
 
-        view.addSubview(searchBar)
-        view.addSubview(myCollectionView)
     }
 
     func buildScreen() {
 
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(filtersStack)
+        scrollView.contentSize.height = 0
+        scrollView.showsHorizontalScrollIndicator = false
+
+        view.addSubview(searchBar)
+        view.addSubview(myCollectionView)
+        view.addSubview(scrollView)
+
+        NSLayoutConstraint.activate([
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 2),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -2),
+            scrollView.heightAnchor.constraint(lessThanOrEqualToConstant: 40)
+        ])
+
+        NSLayoutConstraint.activate([
+            filtersStack.topAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.topAnchor, constant: 1),
+            filtersStack.bottomAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.bottomAnchor, constant: -1),
+            filtersStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            filtersStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor)
+        ])
+
         NSLayoutConstraint.activate([
             searchBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 5),
             searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 2),
             searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -2),
             searchBar.heightAnchor.constraint(lessThanOrEqualToConstant: 30)
