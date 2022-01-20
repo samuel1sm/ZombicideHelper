@@ -25,15 +25,26 @@ class FilterButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func updateButtonState(isActive: Bool) {
+        if isActive {
+            self.setTitleColor(UIColor.black, for: .normal)
+            self.backgroundColor = UIColor.white
+        } else {
+            self.setTitleColor(UIColor.white, for: .normal)
+            self.backgroundColor = UIColor.clear
+        }
+    }
+
 }
 
 extension FilterButton {
-    static func standartConfig(title: String, filterType: String) -> FilterButton {
+    static func standartConfig(title: String, filterType: String, isActive: Bool) -> FilterButton {
         var config = UIButton.Configuration.borderless()
         config.titlePadding = 20
 
         let button = FilterButton(configuration: config, primaryAction: nil)
         button.setTitle(title, for: .normal)
+        button.updateButtonState(isActive: isActive)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.filterType = filterType
         return button

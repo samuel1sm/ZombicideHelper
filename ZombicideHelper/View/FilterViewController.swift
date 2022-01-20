@@ -14,7 +14,6 @@ class FilterViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
 
-        title = "Filter"
         buildScreen()
     }
 
@@ -104,7 +103,8 @@ class FilterViewController: UIViewController {
         let stack = UIStackView.filterStack(distribution: distribution)
 
         buttonTexts.forEach {
-            let button = FilterButton.standartConfig(title: $0, filterType: title)
+            let button = FilterButton.standartConfig(title: $0, filterType: title,
+                                                     isActive: viewModel.getButtonState(filter: title, key: $0))
             button.addTarget(self, action: #selector(onFilterPressed), for: .touchUpInside)
             stack.addArrangedSubview(button)
         }
@@ -148,7 +148,8 @@ class FilterViewController: UIViewController {
 
         for (index, name) in buttonTexts.enumerated() {
             let module = index % stacks.count
-            let button = FilterButton.standartConfig(title: name, filterType: title)
+            let button = FilterButton.standartConfig(title: name, filterType: title,
+                                                     isActive: viewModel.getButtonState(filter: title, key: name))
             button.addTarget(self, action: #selector(onFilterPressed), for: .touchUpInside)
             stacks[module].addArrangedSubview(button)
         }
@@ -190,7 +191,7 @@ class FilterViewController: UIViewController {
 
     @objc func onFilterPressed(_ sender: FilterButton!) {
         let result = viewModel.updateFilter(filter: sender.filterType, key: sender.titleLabel!.text! )
-
+        sender.updateButtonState(isActive: result)
     }
 
 }

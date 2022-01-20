@@ -73,6 +73,23 @@ class ZombiesInformationViewModel {
         }
     }
 
+    func getButtonState(filter: String, key: String) -> Bool {
+        switch filter {
+        case Constants.Filters.type:
+            return filterOptions.zombieType[key]!
+        case Constants.Filters.damage:
+            return filterOptions.damage[key]!
+        case Constants.Filters.actions:
+            return filterOptions.actions[key]!
+        case Constants.Filters.expantions:
+            return filterOptions.gamesInfos[key]!
+        case Constants.Filters.life:
+            return filterOptions.life[key]!
+        default:
+            return false
+        }
+    }
+
     func getZombieInformation(zombie: Int) -> ZombieInformations {
         return filteredList[zombie]
     }
