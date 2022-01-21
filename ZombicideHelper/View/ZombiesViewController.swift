@@ -57,24 +57,35 @@ class ZombiesViewController: UIViewController {
     }
 
     func configureObservables() {
-        self.zombiesViewModel.filterOptions.$actions.sink { data in
-            print(data)
+        self.zombiesViewModel.filterOptions.$actions.dropFirst().sink { data in
+            let button = FilterButton()
+            button.filterType = "actions"
+            button.setTitle("1teste", for: .normal)
+            self.filtersStack.addArrangedSubview(button)
         }.store(in: &subscriptions)
 
-        self.zombiesViewModel.filterOptions.$gamesInfos.sink { data in
-            print(data)
+        self.zombiesViewModel.filterOptions.$gamesInfos.dropFirst().sink { _ in
+            let button = FilterButton()
+            button.setTitle("2testerrrr", for: .normal)
+            self.filtersStack.addArrangedSubview(button)
         }.store(in: &subscriptions)
 
-        self.zombiesViewModel.filterOptions.$damage.sink { data in
-            print(data)
+        self.zombiesViewModel.filterOptions.$damage.dropFirst().sink { _ in
+            let button = FilterButton()
+            button.setTitle("3test", for: .normal)
+            self.filtersStack.addArrangedSubview(button)
         }.store(in: &subscriptions)
 
-        self.zombiesViewModel.filterOptions.$zombieType.sink { data in
-            print(data)
+        self.zombiesViewModel.filterOptions.$zombieType.dropFirst().sink { _ in
+            let button = FilterButton()
+            button.setTitle("t", for: .normal)
+            self.filtersStack.addArrangedSubview(button)
         }.store(in: &subscriptions)
 
-        self.zombiesViewModel.filterOptions.$life.sink { data in
-            print(data)
+        self.zombiesViewModel.filterOptions.$life.dropFirst().sink { _ in
+            let button = FilterButton()
+            button.setTitle("taatata", for: .normal)
+            self.filtersStack.addArrangedSubview(button)
         }.store(in: &subscriptions)
     }
 
