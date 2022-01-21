@@ -5,7 +5,6 @@
 //  Created by FRANCISCO SAMUEL DA SILVA MARTINS on 26/11/21.
 //
 
-import Combine
 import UIKit
 
 class ZombiesInformationViewModel {
@@ -125,11 +124,11 @@ class ZombiesInformationViewModel {
 }
 
 class FilterOptions {
-    @Published var gamesInfos: [String: Bool]!
-    @Published var zombieType: [String: Bool]!
-    @Published var life: [String: Bool]!
-    @Published var damage: [String: Bool]!
-    @Published var actions: [String: Bool]!
+    var gamesInfos: [String: Bool]!
+    var zombieType: [String: Bool]!
+    var life: [String: Bool]!
+    var damage: [String: Bool]!
+    var actions: [String: Bool]!
 
     init(gamesInfos: [String: Bool]!, zombieType: [String: Bool]!,
          life: [String: Bool]!, damage: [String: Bool]!,
