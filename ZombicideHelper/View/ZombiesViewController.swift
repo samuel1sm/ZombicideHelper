@@ -51,36 +51,14 @@ class ZombiesViewController: UIViewController {
         myCollectionView.dataSource = self
         myCollectionView.delegate = self
         searchBar.delegate = self
-        configureObservables()
         buildScreen()
 
-    }
-
-    func configureObservables() {
-        self.zombiesViewModel.filterOptions.$actions.sink { data in
-            print(data)
-        }.store(in: &subscriptions)
-
-        self.zombiesViewModel.filterOptions.$gamesInfos.sink { data in
-            print(data)
-        }.store(in: &subscriptions)
-
-        self.zombiesViewModel.filterOptions.$damage.sink { data in
-            print(data)
-        }.store(in: &subscriptions)
-
-        self.zombiesViewModel.filterOptions.$zombieType.sink { data in
-            print(data)
-        }.store(in: &subscriptions)
-
-        self.zombiesViewModel.filterOptions.$life.sink { data in
-            print(data)
-        }.store(in: &subscriptions)
     }
 
     @objc func openFilters() {
         let filterView = FilterViewController()
         filterView.viewModel = zombiesViewModel
+        filterView.delegate = self
         present(filterView, animated: true, completion: nil)
     }
 
@@ -148,6 +126,25 @@ class ZombiesViewController: UIViewController {
         view.endEditing(true)
     }
 
+}
+
+extension ZombiesViewController: FilterStackDelegate {
+    func updateFilter(create: Bool, title: String) {
+        if create {
+            let button = FilterButton()
+            button.setTitle(title, for: .normal)
+            filtersStack.addArrangedSubview(button)
+        } else {
+            let button = filtersStack.arrangedSubviews.first { view in
+                guard let button = view as? FilterButton else {return false}
+                return button.titleLabel?.text == title
+            }
+
+            if let button = button {
+                filtersStack.removeArrangedSubview(button)
+            }
+        }
+    }
 }
 
 extension ZombiesViewController: UISearchBarDelegate {

@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol FilterStackDelegate: AnyObject {
+    func updateFilter(create: Bool, title: String)
+}
+
 class FilterViewController: UIViewController {
     var viewModel: ZombiesInformationViewModel!
+    weak var delegate: FilterStackDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -192,6 +197,7 @@ class FilterViewController: UIViewController {
     @objc func onFilterPressed(_ sender: FilterButton!) {
         let result = viewModel.updateFilter(filter: sender.filterType, key: sender.titleLabel!.text! )
         sender.updateButtonState(isActive: result)
+        delegate.updateFilter(create: result, title: "\(sender.filterType): \(sender.titleLabel!.text!)")
     }
 
 }
