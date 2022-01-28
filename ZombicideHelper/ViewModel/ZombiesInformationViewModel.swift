@@ -39,30 +39,30 @@ class ZombiesInformationViewModel {
                              actions: actionsInfos)
     }
 
-    func updateFilter(filter: String, key: String) -> Bool {
-        var value: Bool!
-        switch filter {
-        case Constants.Filters.type:
-            value = !filterOptions.zombieType[key]!
-            filterOptions.zombieType[key] = value
-        case Constants.Filters.damage:
-            value = !filterOptions.damage[key]!
-            filterOptions.damage[key] = value
-        case Constants.Filters.actions:
-            value = !filterOptions.actions[key]!
-            filterOptions.actions[key] = value
-        case Constants.Filters.expantions:
-            value = !filterOptions.gamesInfos[key]!
-            filterOptions.gamesInfos[key] = value
-        case Constants.Filters.life:
-            value = !filterOptions.life[key]!
-            filterOptions.life[key] = value
-        default:
-            print("")
-        }
+    func updateFilter(filter: String, rule: String) -> Bool {
+            var value: Bool!
+            switch filter {
+            case Constants.Filters.type:
+                value = !filterOptions.zombieType[rule]!
+                filterOptions.zombieType[rule] = value
+            case Constants.Filters.damage:
+                value = !filterOptions.damage[rule]!
+                filterOptions.damage[rule] = value
+            case Constants.Filters.actions:
+                value = !filterOptions.actions[rule]!
+                filterOptions.actions[rule] = value
+            case Constants.Filters.expantions:
+                value = !filterOptions.gamesInfos[rule]!
+                filterOptions.gamesInfos[rule] = value
+            case Constants.Filters.life:
+                value = !filterOptions.life[rule]!
+                filterOptions.life[rule] = value
+            default:
+                print("")
+            }
 
-        return value
-    }
+            return value
+        }
 
     func filterList (filter: String) {
         if filter != "" {
@@ -72,20 +72,71 @@ class ZombiesInformationViewModel {
         }
     }
 
-    func getButtonState(filter: String, key: String) -> Bool {
+    func getButtonState(filter: String, rule: String) -> Bool {
         switch filter {
         case Constants.Filters.type:
-            return filterOptions.zombieType[key]!
+            return filterOptions.zombieType[rule]!
         case Constants.Filters.damage:
-            return filterOptions.damage[key]!
+            return filterOptions.damage[rule]!
         case Constants.Filters.actions:
-            return filterOptions.actions[key]!
+            return filterOptions.actions[rule]!
         case Constants.Filters.expantions:
-            return filterOptions.gamesInfos[key]!
+            return filterOptions.gamesInfos[rule]!
         case Constants.Filters.life:
-            return filterOptions.life[key]!
+            return filterOptions.life[rule]!
         default:
             return false
+        }
+    }
+
+    func loadFilters() {
+        filteredList = zombiesList
+        var activeFilters = getActiveFilters(filter: Constants.Filters.actions)
+
+        if !activeFilters.isEmpty {
+            filteredList = filteredList.filter { activeFilters.contains($0.status.actions) }
+        }
+
+        activeFilters = getActiveFilters(filter: Constants.Filters.life)
+
+        if !activeFilters.isEmpty {
+            filteredList = filteredList.filter { activeFilters.contains($0.status.minDamageDestroy) }
+        }
+
+        activeFilters = getActiveFilters(filter: Constants.Filters.damage)
+
+        if !activeFilters.isEmpty {
+            filteredList = filteredList.filter { activeFilters.contains($0.status.damageInflicted) }
+        }
+
+        activeFilters = getActiveFilters(filter: Constants.Filters.type)
+
+        if !activeFilters.isEmpty {
+            filteredList = filteredList.filter { activeFilters.contains($0.zombieType) }
+        }
+
+        activeFilters = getActiveFilters(filter: Constants.Filters.expantions)
+
+        if !activeFilters.isEmpty {
+            filteredList = filteredList.filter { activeFilters.contains($0.game) }
+        }
+
+    }
+
+    private func getActiveFilters(filter: String) -> [String] {
+        switch filter {
+        case Constants.Filters.type:
+            return filterOptions.zombieType.filter { $0.value }.map {$0.key}
+        case Constants.Filters.damage:
+            return filterOptions.damage.filter { $0.value }.map {$0.key}
+        case Constants.Filters.actions:
+            return filterOptions.actions.filter { $0.value }.map {$0.key}
+        case Constants.Filters.expantions:
+            return filterOptions.gamesInfos.filter { $0.value }.map {$0.key}
+        case Constants.Filters.life:
+            return filterOptions.life.filter { $0.value }.map {$0.key}
+        default:
+            return []
         }
     }
 

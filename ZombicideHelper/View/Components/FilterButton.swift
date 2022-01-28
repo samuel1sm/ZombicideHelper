@@ -7,8 +7,13 @@
 
 import UIKit
 
+struct FilterButtonData {
+    let type: String
+    let rule: String
+}
+
 class FilterButton: UIButton {
-    var filterType: String = ""
+    var filterType: FilterButtonData?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,7 +51,7 @@ extension FilterButton {
         button.setTitle(title, for: .normal)
         button.updateButtonState(isActive: isActive)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.filterType = filterType
+        button.filterType = FilterButtonData(type: filterType, rule: title)
         return button
     }
 }

@@ -129,21 +129,27 @@ class ZombiesViewController: UIViewController {
 }
 
 extension ZombiesViewController: FilterStackDelegate {
-    func updateFilter(create: Bool, title: String) {
+    func updateFilter(create: Bool, buttonData: FilterButtonData) {
+        let buttonText = "\(buttonData.type): \(buttonData.rule)"
         if create {
             let button = FilterButton()
-            button.setTitle(title, for: .normal)
+            button.setTitle(buttonText, for: .normal)
             filtersStack.addArrangedSubview(button)
         } else {
             let button = filtersStack.arrangedSubviews.first { view in
                 guard let button = view as? FilterButton else {return false}
-                return button.titleLabel?.text == title
+                return button.titleLabel?.text == buttonText
             }
 
             if let button = button {
                 filtersStack.removeArrangedSubview(button)
+                button.removeFromSuperview()
             }
         }
+
+        zombiesViewModel.loadFilters()
+        myCollectionView.reloadData()
+
     }
 }
 

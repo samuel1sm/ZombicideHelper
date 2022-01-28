@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FilterStackDelegate: AnyObject {
-    func updateFilter(create: Bool, title: String)
+    func updateFilter(create: Bool, buttonData: FilterButtonData)
 }
 
 class FilterViewController: UIViewController {
@@ -109,7 +109,7 @@ class FilterViewController: UIViewController {
 
         buttonTexts.forEach {
             let button = FilterButton.standartConfig(title: $0, filterType: title,
-                                                     isActive: viewModel.getButtonState(filter: title, key: $0))
+                                                     isActive: viewModel.getButtonState(filter: title, rule: $0))
             button.addTarget(self, action: #selector(onFilterPressed), for: .touchUpInside)
             stack.addArrangedSubview(button)
         }
@@ -154,7 +154,7 @@ class FilterViewController: UIViewController {
         for (index, name) in buttonTexts.enumerated() {
             let module = index % stacks.count
             let button = FilterButton.standartConfig(title: name, filterType: title,
-                                                     isActive: viewModel.getButtonState(filter: title, key: name))
+                                                     isActive: viewModel.getButtonState(filter: title, rule: name))
             button.addTarget(self, action: #selector(onFilterPressed), for: .touchUpInside)
             stacks[module].addArrangedSubview(button)
         }
@@ -195,9 +195,11 @@ class FilterViewController: UIViewController {
     }
 
     @objc func onFilterPressed(_ sender: FilterButton!) {
-        let result = viewModel.updateFilter(filter: sender.filterType, key: sender.titleLabel!.text! )
+        guard let filterType = sender.filterType else {return}
+
+        let result = viewModel.updateFilter(filter: filterType.type, rule: filterType.rule )
         sender.updateButtonState(isActive: result)
-        delegate.updateFilter(create: result, title: "\(sender.filterType): \(sender.titleLabel!.text!)")
+        delegate.updateFilter(create: result, buttonData: filterType )
     }
 
 }
