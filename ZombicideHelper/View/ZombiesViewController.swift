@@ -143,9 +143,7 @@ extension ZombiesViewController: FilterStackDelegate {
     func updateFilter(create: Bool, buttonData: FilterButtonData) {
         let buttonText = "\(buttonData.type): \(buttonData.rule)"
         if create {
-            let button = FilterButton()
-            button.setTitle(buttonText, for: .normal)
-            button.filterType = buttonData
+            let button = FilterButton.standartConfig(title: buttonText, filterData: buttonData)
             button.addTarget(self, action: #selector(removeFilter(_:)), for: .touchUpInside)
             filtersStack.addArrangedSubview(button)
 
