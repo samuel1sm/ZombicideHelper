@@ -44,7 +44,7 @@ class ZombiesViewController: UIViewController {
         view.backgroundColor = .systemBackground
 
         tapGesture = UITapGestureRecognizer(target: self,
-                         action: #selector(hideKeyboard))
+                                            action: #selector(hideKeyboard))
 
         configureCollectionView()
 
