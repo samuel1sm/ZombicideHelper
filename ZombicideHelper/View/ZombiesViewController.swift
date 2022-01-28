@@ -107,7 +107,7 @@ class ZombiesViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             searchBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            searchBar.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 5),
+            searchBar.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 10),
             searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 2),
             searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -2),
             searchBar.heightAnchor.constraint(lessThanOrEqualToConstant: 30)
