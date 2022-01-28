@@ -126,6 +126,17 @@ class ZombiesViewController: UIViewController {
         view.endEditing(true)
     }
 
+    @objc func removeFilter(_ sender: FilterButton!) {
+        filtersStack.removeArrangedSubview(sender)
+        sender.removeFromSuperview()
+
+        guard let filterType = sender.filterType else {return}
+        _ = zombiesViewModel.updateFilter(filter: filterType.type, rule: filterType.rule)
+
+        zombiesViewModel.loadFilters()
+        myCollectionView.reloadData()
+    }
+
 }
 
 extension ZombiesViewController: FilterStackDelegate {
@@ -134,7 +145,10 @@ extension ZombiesViewController: FilterStackDelegate {
         if create {
             let button = FilterButton()
             button.setTitle(buttonText, for: .normal)
+            button.filterType = buttonData
+            button.addTarget(self, action: #selector(removeFilter(_:)), for: .touchUpInside)
             filtersStack.addArrangedSubview(button)
+
         } else {
             let button = filtersStack.arrangedSubviews.first { view in
                 guard let button = view as? FilterButton else {return false}
