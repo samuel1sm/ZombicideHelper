@@ -54,4 +54,16 @@ extension FilterButton {
         button.filterType = FilterButtonData(type: filterType, rule: title)
         return button
     }
+
+    static func standartConfig(title: String, filterData: FilterButtonData, isActive: Bool = false) -> FilterButton {
+        var config = UIButton.Configuration.borderless()
+        config.titlePadding = 20
+
+        let button = FilterButton(configuration: config, primaryAction: nil)
+        button.setTitle(title, for: .normal)
+        button.updateButtonState(isActive: isActive)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.filterType = filterData
+        return button
+    }
 }
