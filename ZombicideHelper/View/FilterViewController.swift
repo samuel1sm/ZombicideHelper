@@ -23,7 +23,11 @@ class FilterViewController: UIViewController {
     }
 
     func buildScreen() {
-        let filterTitleLabel = UIView.createHeaderView(text: "Filters")
+        let headerView = HeaderView()
+        headerView.setTitle(title: "Filters")
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+//        UIView.createHeaderView(text: "Filters")
+
         let actionsFilterArea = buildSimpleFiltersArea(title: Constants.Filters.actions,
                                                        buttonTexts:
                                                         sortKeys(viewModel.filterOptions.actions))
@@ -43,7 +47,11 @@ class FilterViewController: UIViewController {
         let expationFilterArea = buildLargerFiltersArea(title: Constants.Filters.expantions,
                                                         buttonTexts: sortKeys(viewModel.filterOptions.gamesInfos))
 
-        view.addSubview(filterTitleLabel)
+        let cleanFiltersButton = UIButton()
+        cleanFiltersButton.translatesAutoresizingMaskIntoConstraints = false
+        cleanFiltersButton.setTitle("Clear", for: .normal)
+
+        view.addSubview(headerView)
         view.addSubview(actionsFilterArea)
         view.addSubview(lifeFilterArea)
         view.addSubview(damageFilterArea)
@@ -51,15 +59,15 @@ class FilterViewController: UIViewController {
         view.addSubview(expationFilterArea)
 
         NSLayoutConstraint.activate([
-            filterTitleLabel.topAnchor.constraint(equalTo: view.topAnchor),
-            filterTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            filterTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            filterTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            filterTitleLabel.heightAnchor.constraint(equalToConstant: 44)
+            headerView.topAnchor.constraint(equalTo: view.topAnchor),
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            headerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 44)
         ])
 
         NSLayoutConstraint.activate([
-            lifeFilterArea.topAnchor.constraint(equalTo: filterTitleLabel.bottomAnchor, constant: 20),
+            lifeFilterArea.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 20),
             lifeFilterArea.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             lifeFilterArea.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             lifeFilterArea.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -114,7 +122,10 @@ class FilterViewController: UIViewController {
             stack.addArrangedSubview(button)
         }
 
-        let header = UIView.createHeaderView(text: title, fontSize: 16)
+        let header = HeaderView()
+        header.setTitle(title: title, fontSize: 16)
+        header.translatesAutoresizingMaskIntoConstraints = false
+
         view.addSubview(header)
         view.addSubview(stack)
 
@@ -159,7 +170,10 @@ class FilterViewController: UIViewController {
             stacks[module].addArrangedSubview(button)
         }
 
-        let header = UIView.createHeaderView(text: title, fontSize: 16)
+        let header = HeaderView()
+        header.setTitle(title: title, fontSize: 16)
+        header.translatesAutoresizingMaskIntoConstraints = false
+
         view.addSubview(header)
         view.addSubview(mainStack)
 
@@ -213,45 +227,5 @@ extension UIStackView {
         stack.distribution = distribution
         stack.spacing = spacing
         return stack
-    }
-}
-
-extension UIView {
-    static func createHeaderView(text: String, fontSize: CGFloat = 18, labelHeight: CGFloat = 44,
-                                 maskIntoConstraints: Bool = false) -> UIView {
-
-        let resultView = UIView()
-        resultView.translatesAutoresizingMaskIntoConstraints = maskIntoConstraints
-
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: fontSize, weight: .semibold)
-        label.text = text
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-
-        let lineView = UIView()
-        lineView.translatesAutoresizingMaskIntoConstraints = false
-        lineView.backgroundColor = .gray
-
-        resultView.addSubview(label)
-        resultView.addSubview(lineView)
-
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: resultView.topAnchor),
-            label.leadingAnchor.constraint(equalTo: resultView.leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: resultView.trailingAnchor),
-            label.centerXAnchor.constraint(equalTo: resultView.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: resultView.centerYAnchor, constant: -1)
-        ])
-
-        NSLayoutConstraint.activate([
-            lineView.bottomAnchor.constraint(equalTo: resultView.bottomAnchor),
-            lineView.leadingAnchor.constraint(equalTo: resultView.leadingAnchor),
-            lineView.trailingAnchor.constraint(equalTo: resultView.trailingAnchor),
-            lineView.centerXAnchor.constraint(equalTo: resultView.centerXAnchor),
-            lineView.heightAnchor.constraint(equalToConstant: 1)
-        ])
-
-        return resultView
     }
 }
