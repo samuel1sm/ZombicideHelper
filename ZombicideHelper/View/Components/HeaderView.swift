@@ -7,8 +7,29 @@
 
 import UIKit
 
+protocol HeaderButtonDelegate: AnyObject {
+    func onHeaderButtonClicked()
+}
+
 class HeaderView: UIView {
-    var uiButton: UIButton?
+    var button: UIButton = {
+        var config = UIButton.Configuration.filled()
+        config.titlePadding = 10
+        config.titleAlignment = .center
+        config.baseBackgroundColor = .white
+        config.baseForegroundColor = .black
+        let button = UIButton(configuration: config, primaryAction: nil)
+
+        button.titleLabel?.textColor = .black
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.cornerRadius = 4
+
+        return button
+    }()
+
+    weak var delegate: HeaderButtonDelegate?
 
     var titleLabel: UILabel = {
         let label = UILabel()
@@ -24,8 +45,16 @@ class HeaderView: UIView {
         lineView.translatesAutoresizingMaskIntoConstraints = false
         lineView.backgroundColor = .gray
 
+        self.addSubview(button)
         self.addSubview(titleLabel)
         self.addSubview(lineView)
+        button.isHidden = true
+
+        NSLayoutConstraint.activate([
+            button.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            button.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
+            button.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
+        ])
 
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor),
@@ -47,10 +76,19 @@ class HeaderView: UIView {
     func setTitle(title: String, fontSize: CGFloat = 18) {
         titleLabel.text = title
         titleLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .semibold)
+    }
 
+    func setButton(buttonText: String) {
+        button.isHidden = false
+        button.setTitle(buttonText, for: .normal)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    @objc func headerButtonClicked(sender: UIButton) {
+        delegate?.onHeaderButtonClicked()
     }
 }
