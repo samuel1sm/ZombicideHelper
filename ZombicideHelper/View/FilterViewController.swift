@@ -26,7 +26,7 @@ class FilterViewController: UIViewController {
         let headerView = HeaderView()
         headerView.setTitle(title: "Filters")
         headerView.translatesAutoresizingMaskIntoConstraints = false
-//        UIView.createHeaderView(text: "Filters")
+        headerView.setButton(buttonText: "Clear")
 
         let actionsFilterArea = buildSimpleFiltersArea(title: Constants.Filters.actions,
                                                        buttonTexts:
