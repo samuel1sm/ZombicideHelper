@@ -72,6 +72,14 @@ class ZombiesInformationViewModel {
         }
     }
 
+    func clearFilters() {
+        filterOptions.zombieType.keys.forEach { filterOptions.zombieType[$0] = false}
+        filterOptions.damage.keys.forEach { filterOptions.damage[$0] = false}
+        filterOptions.actions.keys.forEach { filterOptions.actions[$0] = false}
+        filterOptions.gamesInfos.keys.forEach { filterOptions.gamesInfos[$0] = false}
+        filterOptions.life.keys.forEach { filterOptions.life[$0] = false}
+    }
+
     func getButtonState(filter: String, rule: String) -> Bool {
         switch filter {
         case Constants.Filters.type:
