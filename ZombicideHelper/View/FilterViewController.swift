@@ -14,6 +14,7 @@ protocol FilterStackDelegate: AnyObject {
 class FilterViewController: UIViewController {
     var viewModel: ZombiesInformationViewModel!
     weak var delegate: FilterStackDelegate!
+    var stacksList: [UIStackView] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class FilterViewController: UIViewController {
     func buildScreen() {
         let headerView = HeaderView()
         headerView.setTitle(title: "Filters")
+        headerView.delegate = self
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.setButton(buttonText: "Clear")
 
@@ -114,6 +116,7 @@ class FilterViewController: UIViewController {
                                 distribution: UIStackView.Distribution = .fillEqually) -> UIView {
         let view = buildFilterView()
         let stack = UIStackView.filterStack(distribution: distribution)
+        stacksList.append(stack)
 
         buttonTexts.forEach {
             let button = FilterButton.standartConfig(title: $0, filterType: title,
@@ -158,6 +161,7 @@ class FilterViewController: UIViewController {
 
         let stacks = Array(0..<6).map { _ -> UIStackView in
             let stack = UIStackView.filterStack()
+            stacksList.append(stack)
             mainStack.addArrangedSubview(stack)
             return stack
         }
@@ -214,6 +218,19 @@ class FilterViewController: UIViewController {
         let result = viewModel.updateFilter(filter: filterType.type, rule: filterType.rule )
         sender.updateButtonState(isActive: result)
         delegate.updateFilter(create: result, buttonData: filterType )
+    }
+
+}
+
+extension FilterViewController: HeaderViewDelegate {
+    func onHeaderButtonClicked() {
+        viewModel.clearFilters()
+        stacksList.forEach { $0.arrangedSubviews.forEach { button in
+            guard let filterButton = button as? FilterButton else {return}
+//            filterButton.sendActions(for: .touchUpInside)
+            filterButton.updateButtonState(isActive: false)
+            delegate.updateFilter(create: false, buttonData: filterButton.filterType! )
+        }}
     }
 
 }
