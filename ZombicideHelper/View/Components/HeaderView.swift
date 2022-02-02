@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol HeaderButtonDelegate: AnyObject {
+protocol HeaderViewDelegate: AnyObject {
     func onHeaderButtonClicked()
 }
 
@@ -29,7 +29,7 @@ class HeaderView: UIView {
         return button
     }()
 
-    weak var delegate: HeaderButtonDelegate?
+    weak var delegate: HeaderViewDelegate?
 
     var titleLabel: UILabel = {
         let label = UILabel()
