@@ -41,6 +41,7 @@ class HeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        button.addTarget(self, action: #selector(headerButtonClicked(sender: )), for: .touchUpInside)
         let lineView = UIView()
         lineView.translatesAutoresizingMaskIntoConstraints = false
         lineView.backgroundColor = .gray
