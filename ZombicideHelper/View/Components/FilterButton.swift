@@ -22,6 +22,7 @@ class FilterButton: UIButton {
         self.layer.cornerRadius = 4
         self.layer.borderWidth = 2
         self.setTitleColor(UIColor.white, for: .normal)
+        self.isSelected = false
         self.titleLabel?.textAlignment = .center
         self.titleLabel?.font = UIFont.systemFont(ofSize: 16)
     }
@@ -31,13 +32,7 @@ class FilterButton: UIButton {
     }
 
     func updateButtonState(isActive: Bool) {
-        if isActive {
-            self.setTitleColor(UIColor.black, for: .normal)
-            self.backgroundColor = UIColor.white
-        } else {
-            self.setTitleColor(UIColor.white, for: .normal)
-            self.backgroundColor = UIColor.clear
-        }
+        self.isSelected = isActive
     }
 
 }
@@ -46,7 +41,8 @@ extension FilterButton {
     static func standartConfig(title: String, filterType: String, isActive: Bool) -> FilterButton {
         var config = UIButton.Configuration.borderless()
         config.titlePadding = 20
-
+        config.baseForegroundColor = .white
+        config.baseBackgroundColor = .white
         let button = FilterButton(configuration: config, primaryAction: nil)
         button.setTitle(title, for: .normal)
         button.updateButtonState(isActive: isActive)
@@ -58,7 +54,9 @@ extension FilterButton {
     static func standartConfig(title: String, filterData: FilterButtonData, isActive: Bool = false) -> FilterButton {
         var config = UIButton.Configuration.borderless()
         config.titlePadding = 20
-
+        config.baseForegroundColor = .white
+        config.baseBackgroundColor = .white
+        config.titlePadding = 20
         let button = FilterButton(configuration: config, primaryAction: nil)
         button.setTitle(title, for: .normal)
         button.updateButtonState(isActive: isActive)
